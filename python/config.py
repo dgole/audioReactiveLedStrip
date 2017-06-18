@@ -14,7 +14,7 @@ if DEVICE == 'pi':
     """DMA channel used for generating PWM signal (try 5)"""
     BRIGHTNESS = 50
     """Brightness of LED strip between 0 and 255"""
-    LED_INVERT = False
+    LED_INVERT = True
     """Set True if using an inverting logic level converter"""
     SOFTWARE_GAMMA_CORRECTION = True
     """Set to True because Raspberry Pi doesn't use hardware dithering"""
