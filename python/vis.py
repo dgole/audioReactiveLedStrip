@@ -18,7 +18,6 @@ def create_mel_bank():
                                                freq_max=config.MAX_FREQUENCY,
                                                num_fft_bands=samples,
                                                sample_rate=config.MIC_RATE)
-
 samples = None
 mel_y = None
 mel_x = None
@@ -65,36 +64,13 @@ def interpolate(y, new_length):
     z = np.interp(x_new, x_old, y)
     return z
 
-#####################################
-# Matricies to do the music manipulations
-#####################################
-# this is pixels x pixels, picks out certain notes based on given scale
-def getPixelPixelMatrix(noteList):
-    matrix = np.zeros([config.N_PIXELS, config.N_PIXELS])
-    for i in range(config.N_PIXELS):
-        for j in range(config.N_PIXELS):
-            if (j-i%12)%12 in noteList:
-                matrix[i, j] = 1.0
-            else:
-                matrix[i, j] = 0.0
-    return matrix
-# this is 12 x pixels, lets you sum up how much of the given scale is in the spectrum for each possible key
-def getScalePixelMatrix(noteList):
-    matrix = np.zeros([12, config.N_PIXELS])
-    for i in range(12):
-        for j in range(config.N_PIXELS):
-            if (j-i%12)%12 in noteList:
-                matrix[i, j] = 1.0
-            else:
-                matrix[i, j] = 0.0
-    return matrix
-# Actually Define a bunch of these matricies
-determineKeyMatrix = getScalePixelMatrix([0,2,4,7,9,11])
-diatonicMatrix = getPixelPixelMatrix([0,2,4,5,7,9,11])
-nonDiatonicMatrix = getPixelPixelMatrix([1,3,6,10])
-pentatonicMatrix = getPixelPixelMatrix([0,2,4,7,9])
-chordMatrix = getPixelPixelMatrix([0,2,4])
-tonicMatrix = getPixelPixelMatrix([0])
+# Define a bunch of these matricies
+determineKeyMatrix = tools.getScalePixelMatrix([0,2,4,7,9,11])
+diatonicMatrix = tools.getPixelPixelMatrix([0,2,4,5,7,9,11])
+nonDiatonicMatrix = tools.getPixelPixelMatrix([1,3,6,10])
+pentatonicMatrix = tools.getPixelPixelMatrix([0,2,4,7,9])
+chordMatrix = tools.getPixelPixelMatrix([0,2,4])
+tonicMatrix = tools.getPixelPixelMatrix([0])
 
 keyObj = tools.Key(determineKeyMatrix, 0.001)
 chordObj = tools.Chord(0.05)
