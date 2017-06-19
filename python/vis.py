@@ -278,8 +278,8 @@ def visualize_spectrum(y):
         g = temp2 * 0.0
         b = temp2 * 1.0
     '''
-    #output = np.array([r, g,b]) * 255
-    output = np.array([r[::-1], g[::-1],b[::-1]]) * 255
+    #output = np.array([r,g,b]) * 255
+    output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     return output
 
 fft_window = np.hamming(int(config.MIC_RATE / config.FPS) * config.N_ROLLING_HISTORY)
