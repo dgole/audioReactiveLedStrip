@@ -7,6 +7,22 @@ from numpy import *
 from scipy.ndimage.filters import gaussian_filter1d
 import config
 
+class Key:
+    def __init__(self, matrix, alpha):
+        self.keySums = np.ones(12)
+        self.matrix = matrix
+        self.alpha = alpha
+        self.keyStringList = ['c', 'cs', 'd', 'ef', 'e', 'f', 'f#', 'g', 'af', 'a', 'bf', 'b' ]
+    def update(self, newValues):
+        newKeySums = np.dot(self.matrix, newValues)
+        self.keySums = self.alpha * newKeySums + (1.0 - self.alpha) * self.keySums
+    def getKeyNum(self):
+        return self.keySums.argmax()
+    def printKey(self):
+        print("most likely key is " + self.keyStringList[self.getKeyNum()])
+        print(self.keySums)
+
+
 class Chord:
     def __init__(self, alpha):
         # define the 7 x pixels matrix for each of 12 possible keys.  
@@ -32,5 +48,27 @@ class Chord:
     def printChord(self):
         print("most likely chord is " + self.chordStringList[self.getChordNum()])
         #print(self.chordSums)
-chordObj = Chord(0.05)
+
+class Beat:
+    def __init__(self, alpha):
+        self.alpha = alpha
+        self.matrix = np.zeros(config.N_PIXELS)
+        self.sum = 0.0
+        self.oldSum = 0.0
+        for i in range(config.N_PIXELS):
+            if i<9:
+                self.matrix[i] = 1.0
+            else:
+                self.matrix[i] = 0.0                   
+    def update(self, newValues):
+        self.oldSum = self.sum
+        newSum = np.dot(self.matrix, newValues)
+        self.sum = self.alpha * newSum + (1.0 - self.alpha) * self.sum
+    def beatRightNow(self):
+        if self.sum > 2.0*self.oldSum:
+            return True 
+            print(self.sum, self.oldSum)
+        else:
+            return False
+
 
