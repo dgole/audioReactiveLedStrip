@@ -30,11 +30,11 @@ _max_led_FPS = int(((N_PIXELS * 30e-6) + 50e-6)**-1.0)
 assert FPS <= _max_led_FPS, 'FPS must be <= {}'.format(_max_led_FPS)
 
 # 130.81 is c3
-MIN_FREQUENCY = 130.81 * 1.0
+MIN_FREQUENCY = 130.81 * 0.5
 """Frequencies below this value will be removed during audio processing"""
 
 # 3951.06 is b9
-MAX_FREQUENCY = 3951.06 * 1.0
+MAX_FREQUENCY = 3951.06 * 0.5
 """Frequencies above this value will be removed during audio processing"""
 
 N_FFT_BINS = N_PIXELS
