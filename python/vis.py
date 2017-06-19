@@ -261,7 +261,7 @@ def visualize_spectrum(y):
     '''
     if beatObj.beatRightNow():
         colorThisTime = (colorThisTime + 1)%3
-        print("BEAT!!!!")
+        print("BEAT!!!")
     if colorThisTime == 0:
         r = temp2 * 1.0
         g = temp2 * 0.0
