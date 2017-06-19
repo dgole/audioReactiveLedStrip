@@ -275,7 +275,7 @@ def visualize_spectrum(y):
         g = temp2 * 0.0
         b = temp2 * 1.0
     '''
-    r=np.flip(r); g=np.flip(g); b=np.flip(b)
+    r=np.fliplr(r); g=np.fliplr(g); b=np.fliplr(b)
     output = np.array([r, g,b]) * 255
     return output
 
