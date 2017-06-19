@@ -22,7 +22,7 @@ def create_mel_bank():
 samples = None
 mel_y = None
 mel_x = None
-tools.create_mel_bank()
+create_mel_bank()
 
 #####################################
 # Track FPS
