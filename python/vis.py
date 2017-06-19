@@ -20,7 +20,7 @@ tools.create_mel_bank()
 # Track FPS
 #####################################
 _time_prev = time.time() * 1000.0
-_fps = ExpFilter(val=config.FPS, alpha_decay=0.2, alpha_rise=0.2)
+_fps = tools.ExpFilter(val=config.FPS, alpha_decay=0.2, alpha_rise=0.2)
 def frames_per_second():
     global _time_prev, _fps
     time_now = time.time() * 1000.0
@@ -92,11 +92,11 @@ keyObj = tools.Key(determineKeyMatrix, 0.001)
 chordObj = tools.Chord(0.05)
 beatObj = tools.Beat(0.5)
 
-rawFilt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
-ledFilt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
+rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
+ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
 _prev_spectrum = np.tile(0.01, config.N_PIXELS)
-mel_gain = ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
-volume = ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
+mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
+volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
 colorThisTime = 0
 def visualize_spectrum(y):
