@@ -240,8 +240,8 @@ class Beat:
             return False
 beatObj = Beat(0.5)
 
-raw_filt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
-led_filt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
+rawFilt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
+ledFilt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
 _prev_spectrum = np.tile(0.01, config.N_PIXELS)
 mel_gain = ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
 volume = ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
@@ -256,8 +256,8 @@ def visualize_spectrum(y):
     keyObj.update(y)
     chordObj.update(y, keyObj.getKeyNum())
     beatObj.update(y)
-    temp1 = raw_filt.update(y)
-    temp2 = led_filt.update(y)
+    temp1 = rawFilt.update(y)
+    temp2 = ledFilt.update(y)
     if beatObj.beatRightNow():
         colorThisTime = (colorThisTime + 1)%3
         print("BEAT!!!!")
