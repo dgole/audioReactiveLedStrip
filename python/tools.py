@@ -7,6 +7,29 @@ from numpy import *
 from scipy.ndimage.filters import gaussian_filter1d
 import config
 
+#####################################
+# Matricies to do the music manipulations
+#####################################
+# this is pixels x pixels, picks out certain notes based on given scale
+def getPixelPixelMatrix(noteList):
+    matrix = np.zeros([config.N_PIXELS, config.N_PIXELS])
+    for i in range(config.N_PIXELS):
+        for j in range(config.N_PIXELS):
+            if (j-i%12)%12 in noteList:
+                matrix[i, j] = 1.0
+            else:
+                matrix[i, j] = 0.0
+    return matrix
+# this is 12 x pixels, lets you sum up how much of the given scale is in the spectrum for each possible key
+def getScalePixelMatrix(noteList):
+    matrix = np.zeros([12, config.N_PIXELS])
+    for i in range(12):
+        for j in range(config.N_PIXELS):
+            if (j-i%12)%12 in noteList:
+                matrix[i, j] = 1.0
+            else:
+                matrix[i, j] = 0.0
+    return matrix
 
 
 class ExpFilter:
