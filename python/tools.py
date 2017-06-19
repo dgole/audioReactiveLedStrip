@@ -149,11 +149,4 @@ def compute_melmat(num_mel_bands, freq_min, freq_max, num_fft_bands, sample_rate
     print(melmat[9,0:30])
     print(melmat[10,0:30])
     return melmat, (center_frequencies_mel, freqs)
-def create_mel_bank():
-    global samples, mel_y, mel_x
-    samples = int(config.MIC_RATE * config.N_ROLLING_HISTORY / (2.0 * config.FPS))
-    mel_y, (_, mel_x) = compute_melmat(num_mel_bands=config.N_FFT_BINS,
-                                             freq_min=config.MIN_FREQUENCY,
-                                               freq_max=config.MAX_FREQUENCY,
-                                               num_fft_bands=samples,
-                                               sample_rate=config.MIC_RATE)
+
