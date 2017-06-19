@@ -168,7 +168,7 @@ def compute_melmat(num_mel_bands, freq_min, freq_max, num_fft_bands, sample_rate
     print('last 20 feqs \n' + str(freqs[-20:]))
     print('center feqs in mels \n' + str(center_frequencies_mel))
     print('center feqs in mels \n' + str(center_frequencies_hz))
-    print('melmat for some of the lowest notes \n'
+    print('melmat for some of the lowest notes \n')
     print(melmat[0,0:30])
     print(melmat[1,0:30])
     print(melmat[2,0:30])
