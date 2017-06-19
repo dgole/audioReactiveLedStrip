@@ -258,6 +258,7 @@ def visualize_spectrum(y):
     beatObj.update(y)
     temp1 = rawFilt.update(y)
     temp2 = ledFilt.update(y)
+    '''
     if beatObj.beatRightNow():
         colorThisTime = (colorThisTime + 1)%3
         print("BEAT!!!!")
@@ -273,7 +274,8 @@ def visualize_spectrum(y):
         r = temp2 * 0.0
         g = temp2 * 0.0
         b = temp2 * 1.0
-
+    '''
+	r=np.flip(r); g=np.flip(g); b=np.flip(b)
     output = np.array([r, g,b]) * 255
     return output
 
