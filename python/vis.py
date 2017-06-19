@@ -175,7 +175,7 @@ tonicMatrix = getPixelPixelMatrix([0])
 
 keyObj = tools.Key(determineKeyMatrix, 0.001)
 chordObj = tools.Chord(0.05)
-beatObj = Beat(0.5)
+beatObj = tools.Beat(0.5)
 
 rawFilt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
 ledFilt = ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
