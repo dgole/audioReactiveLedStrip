@@ -90,7 +90,8 @@ class Chord:
     def printChord(self):
         print("most likely chord is " + self.chordStringList[self.getChordNum()])
         #print(self.chordSums)
-
+         
+            
 class Beat:
     def __init__(self, alpha):
         self.alpha = alpha
