@@ -80,7 +80,7 @@ volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_ri
 count = 0
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
-    global _prev_spectrum, colorThisTime
+    global _prev_spectrum, count
     #y = np.copy(interpolate(y, config.N_PIXELS))
     _prev_spectrum = np.copy(y)
     # Color channel mappings
