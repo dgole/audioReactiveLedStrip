@@ -21,7 +21,7 @@ if DEVICE == 'pi':
 
 USE_GUI = False
 DISPLAY_FPS = True
-N_PIXELS = 120
+N_PIXELS = 60
 GAMMA_TABLE_PATH = os.path.join(os.path.dirname(__file__), 'gamma_table.npy')
 MIC_RATE = 44100
 """Sampling frequency of the microphone in Hz"""
@@ -34,7 +34,8 @@ MIN_FREQUENCY = 130.81 * 1.0
 """Frequencies below this value will be removed during audio processing"""
 
 # 4066.84 is b7 and a half
-MAX_FREQUENCY = 4066.84 * 1.0
+# 3951.066 is b7
+MAX_FREQUENCY = 3951.066 * 1.0
 """Frequencies above this value will be removed during audio processing"""
 
 N_FFT_BINS = N_PIXELS
