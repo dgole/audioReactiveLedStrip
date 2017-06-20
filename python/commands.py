@@ -23,9 +23,7 @@ mel_y = None
 mel_x = None
 create_mel_bank()
 
-#####################################
 # Track FPS
-#####################################
 _time_prev = time.time() * 1000.0
 _fps = tools.ExpFilter(val=config.FPS, alpha_decay=0.2, alpha_rise=0.2)
 def frames_per_second():
@@ -37,9 +35,7 @@ def frames_per_second():
         return _fps.value
     return _fps.update(1000.0 / dt)
 
-#####################################
 # Stuff that was already here
-#####################################
 def memoize(function):
     """Provides a decorator for memoizing functions"""
     from functools import wraps
@@ -64,17 +60,16 @@ def interpolate(y, new_length):
     z = np.interp(x_new, x_old, y)
     return z
 
-# Define a bunch of these matricies
-determineKeyMatrix = tools.getScalePixelMatrix([0,2,4,7,9,11])
-diatonicMatrix = tools.getPixelPixelMatrix([0,2,4,5,7,9,11])
-nonDiatonicMatrix = tools.getPixelPixelMatrix([1,3,6,10])
-pentatonicMatrix = tools.getPixelPixelMatrix([0,2,4,7,9])
-chordMatrix = tools.getPixelPixelMatrix([0,2,4])
-tonicMatrix = tools.getPixelPixelMatrix([0])
 
-keyObj = tools.Key(determineKeyMatrix, 0.001)
-chordObj = tools.Chord(0.05)
-beatObj = tools.Beat(0.5)
+
+#####################################################
+# CHANGE STUFF BELOW THIS ###########################
+#####################################################
+
+# Define a bunch of these matricies
+keyMatrix = tools.getScalePixelMatrix([0])
+
+keyObj = tools.Key(keyMatrix, 0.001)
 
 rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
 ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
@@ -82,7 +77,6 @@ _prev_spectrum = np.tile(0.01, config.N_PIXELS)
 mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
-colorThisTime = 0
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, colorThisTime
@@ -90,33 +84,23 @@ def visualize_spectrum(y):
     _prev_spectrum = np.copy(y)
     # Color channel mappings
     keyObj.update(y)
-    chordObj.update(y, keyObj.getKeyNum())
-    beatObj.update(y)
+    keyObj.printKey()
     temp1 = rawFilt.update(y)
     temp2 = ledFilt.update(y)
     r = temp2 * 1.0
     g = temp2 * 0.0
     b = temp2 * 1.0
-    '''
-    if beatObj.beatRightNow():
-        colorThisTime = (colorThisTime + 1)%3
-        print("BEAT!!!!")
-    if colorThisTime == 0:
-        r = temp2 * 1.0
-        g = temp2 * 0.0
-        b = temp2 * 0.0
-    elif colorThisTime == 1:
-        r = temp2 * 0.0
-        g = temp2 * 1.0
-        b = temp2 * 0.0
-    if colorThisTime == 2:
-        r = temp2 * 0.0
-        g = temp2 * 0.0
-        b = temp2 * 1.0
-    '''
     #output = np.array([r,g,b]) * 255
     output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     return output
+
+
+
+
+
+####################################################
+# don't change stuff below this ####################
+####################################################
 
 fft_window = np.hamming(int(config.MIC_RATE / config.FPS) * config.N_ROLLING_HISTORY)
 prev_fps_update = time.time()
@@ -161,7 +145,6 @@ def microphone_update(audio_samples):
         if time.time() - 2.0 > prev_fps_update:
             prev_fps_update = time.time()
             print('FPS {:.0f} / {:.0f}'.format(fps, config.FPS))
-            keyObj.printKey()
    
                 
 
