@@ -66,10 +66,7 @@ def interpolate(y, new_length):
 # CHANGE STUFF BELOW THIS ###########################
 #####################################################
 
-# Define a bunch of these matricies
-keyMatrix = tools.getScalePixelMatrix([0])
-
-keyObj = tools.Key(keyMatrix, 0.01)
+noteObj = tools.Note(0.01)
 
 rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
 ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
@@ -77,19 +74,21 @@ _prev_spectrum = np.tile(0.01, config.N_PIXELS)
 mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
-count = 0
+count0 = 0
+keyHist = np.zeros(10)
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
-    global _prev_spectrum, count
+    global _prev_spectrum, count0
     #y = np.copy(interpolate(y, config.N_PIXELS))
     _prev_spectrum = np.copy(y)
     # Color channel mappings
-    count+=1
-    keyObj.update(y)
-    if count%10==0:
-        keyObj.printKey()
+    count0+=1
+    noteObj.update(y)
     temp1 = rawFilt.update(y)
     temp2 = ledFilt.update(y)
+    if count0%10==0:
+        noteObj.printNoteHist()
+    
     r = temp2 * 1.0
     g = temp2 * 0.0
     b = temp2 * 1.0
