@@ -66,7 +66,7 @@ def interpolate(y, new_length):
 # CHANGE STUFF BELOW THIS ###########################
 #####################################################
 
-noteObj = tools.Note(0.05)
+noteObj = tools.Note(0.05, 0.6)
 
 rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
 ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
