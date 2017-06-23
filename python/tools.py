@@ -61,7 +61,7 @@ class Note:
     def update(self, newValues):
         newSums = np.dot(self.matrix, newValues)
         self.sums = self.alpha * newSums + (1.0 - self.alpha) * self.sums
-        if np.amax(self.sums)*2.0 > np.sum(self.sums) and self.sums.argmax() != self.uniqueNoteHist[self.uniqueNoteCount-1]:
+        if np.amax(self.sums)*8.0 > np.sum(self.sums) and self.sums.argmax() != self.uniqueNoteHist[self.uniqueNoteCount-1]:
             self.uniqueNoteCount=(self.uniqueNoteCount+1)%1000
             self.uniqueNoteHist[self.uniqueNoteCount]=self.sums.argmax()
     def getNoteNum(self):
