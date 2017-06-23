@@ -49,6 +49,27 @@ class ExpFilter:
         self.value = alpha * value + (1.0 - alpha) * self.value
         return self.value
 
+
+class Note:
+    def __init__(self, alpha):
+        self.sums = np.ones(12)
+        self.matrix = getScalePixelMatrix([0])
+        self.alpha = alpha
+        self.noteStringList = ['c', 'cs', 'd', 'ef', 'e', 'f', 'f#', 'g', 'af', 'a', 'bf', 'b' ]
+        self.uniqueNoteCount=1
+	    self.uniqueNoteHist = np.zeros(1000)
+    def update(self, newValues):
+        newSums = np.dot(self.matrix, newValues)
+        self.sums = self.alpha * newSums + (1.0 - self.alpha) * self.sums
+	    if np.amax(self.sums)*2.0 > np.sum(self.sums) and self.sums.argmax() != self.uniqueNoteList[self.uniqueNoteCount-1]:
+            self.uniqueNoteCount=(self.uniqueNoteCount+1)%1000
+            self.uniqueNoteList[self.uniqueNoteCount]=self.sums.argmax()
+    def getNoteNum(self):
+        return self.sums.argmax()
+    def printNoteHist(self):
+        print("past notes are " + self.uniqueNoteList[self.uniqueNoteCount-10:self.uniqueNoteCount])
+
+
 class Key:
     def __init__(self, matrix, alpha):
         self.keySums = np.ones(12)
