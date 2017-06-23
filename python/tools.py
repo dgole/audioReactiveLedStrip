@@ -64,7 +64,7 @@ class Note:
         if (np.amax(self.sums) / np.sum(self.sums)) > self.thresh and self.sums.argmax() != self.uniqueNoteHist[-1]:
             self.uniqueNoteHist.append(self.noteStringList(self.sums.argmax()))
     def printNoteHist(self):
-        print("past notes are " + str(self.uniqueNoteHist[-10:])
+        print("past notes are " + str(self.uniqueNoteHist[-10:]))
     def printCurrentNote(self):
         print("most likely note is " + self.noteStringList[self.sums.argmax])
         print(np.amax(self.sums) / np.sum(self.sums))
