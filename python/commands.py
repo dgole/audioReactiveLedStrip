@@ -88,6 +88,7 @@ def visualize_spectrum(y):
     temp2 = ledFilt.update(y)
     if count0%10==0:
         noteObj.printNoteHist()
+        noteObj.printCurrentNote()
     
     r = temp2 * 1.0
     g = temp2 * 0.0
