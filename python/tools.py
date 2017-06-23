@@ -61,13 +61,13 @@ class Note:
     def update(self, newValues):
         newSums = np.dot(self.matrix, newValues)
         self.sums = self.alpha * newSums + (1.0 - self.alpha) * self.sums
-        if np.amax(self.sums)*2.0 > np.sum(self.sums) and self.sums.argmax() != self.uniqueNoteHist[self.uniqueNoteCount]:
+        if np.amax(self.sums) > (np.sum(self.sums)/0.5) and self.sums.argmax() != self.uniqueNoteHist[self.uniqueNoteCount]:
             self.uniqueNoteCount=(self.uniqueNoteCount+1)%1000
             self.uniqueNoteHist[self.uniqueNoteCount]=self.sums.argmax()
     def getNoteNum(self):
         return self.sums.argmax()
     def printNoteHist(self):
-        print("past notes are " + str(self.noteStringList[*self.uniqueNoteHist[self.uniqueNoteCount-10:self.uniqueNoteCount]]))
+        print("past notes are " + str(self.uniqueNoteHist[self.uniqueNoteCount-10:self.uniqueNoteCount]))
     def printCurrentNote(self):
         print("most likely note is " + self.noteStringList[self.getNoteNum()])
         print(np.amax(self.sums) / np.sum(self.sums))
