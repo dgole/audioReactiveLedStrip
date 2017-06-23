@@ -67,7 +67,7 @@ class Note:
     def getNoteNum(self):
         return self.sums.argmax()
     def printNoteHist(self):
-        print("past notes are " + self.uniqueNoteHist[self.uniqueNoteCount-10:self.uniqueNoteCount])
+        print("past notes are " + str(self.uniqueNoteHist[self.uniqueNoteCount-10:self.uniqueNoteCount]))
 
 
 class Key:
