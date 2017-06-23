@@ -63,7 +63,7 @@ class Note:
         self.sums = self.alpha * newSums + (1.0 - self.alpha) * self.sums
         if np.amax(self.sums)*2.0 > np.sum(self.sums) and self.sums.argmax() != self.uniqueNoteHist[self.uniqueNoteCount]:
             self.uniqueNoteCount=(self.uniqueNoteCount+1)%1000
-            self.uniqueNoteHist[self.uniqueNoteCount]=self.noteStringList[self.sums.argmax()]
+            self.uniqueNoteHist[self.uniqueNoteCount]=self.sums.argmax()
     def getNoteNum(self):
         return self.sums.argmax()
     def printNoteHist(self):
