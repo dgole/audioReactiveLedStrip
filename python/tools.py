@@ -67,7 +67,7 @@ class Note:
     def getNoteNum(self):
         return self.sums.argmax()
     def printNoteHist(self):
-        print("past notes are " + str(self.uniqueNoteHist[self.uniqueNoteCount-10:self.uniqueNoteCount]))
+        print("past notes are " + str(self.noteStringList[*self.uniqueNoteHist[self.uniqueNoteCount-10:self.uniqueNoteCount]]))
     def printCurrentNote(self):
         print("most likely note is " + self.noteStringList[self.getNoteNum()])
         print(np.amax(self.sums) / np.sum(self.sums))
