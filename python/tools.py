@@ -57,7 +57,7 @@ class Note:
         self.alpha = alpha
         self.noteStringList = ['c', 'cs', 'd', 'ef', 'e', 'f', 'f#', 'g', 'af', 'a', 'bf', 'b' ]
         self.uniqueNoteCount=1
-	    self.uniqueNoteHist = np.zeros(1000)
+        self.uniqueNoteHist = np.zeros(1000)
     def update(self, newValues):
         newSums = np.dot(self.matrix, newValues)
         self.sums = self.alpha * newSums + (1.0 - self.alpha) * self.sums
