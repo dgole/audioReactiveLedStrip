@@ -51,7 +51,8 @@ class ExpFilter:
 
 
 class Note:
-    def __init__(self, alpha):
+    def __init__(self, alpha, thresh):
+	self.thresh=thresh
         self.sums = np.ones(12)
         self.matrix = getScalePixelMatrix([0])
         self.alpha = alpha
@@ -61,7 +62,7 @@ class Note:
     def update(self, newValues):
         newSums = np.dot(self.matrix, newValues)
         self.sums = self.alpha * newSums + (1.0 - self.alpha) * self.sums
-        if np.amax(self.sums) > (np.sum(self.sums)/0.5) and self.sums.argmax() != self.uniqueNoteHist[self.uniqueNoteCount]:
+        if (np.amax(self.sums) / np.sum(self.sums)) > self.thresh and self.sums.argmax() != self.uniqueNoteHist[self.uniqueNoteCount]:
             self.uniqueNoteCount=(self.uniqueNoteCount+1)%1000
             self.uniqueNoteHist[self.uniqueNoteCount]=self.sums.argmax()
     def getNoteNum(self):
