@@ -149,24 +149,24 @@ class Runner:
         self.color = color
         self.locInt = startLoc
         self.locFloat = float(startLoc)
-        outArray = np.zeros(config.N_PIXELS)
-        outZeros = np.zeros_like(outArray)
+        self.outArray = np.zeros(config.N_PIXELS)
+        self.outZeros = np.zeros_like(outArray)
         if self.speed > 0:
-            outArray[startLoc-n:startLoc] = 1.0
+            self.outArray[self.startLoc-self.n:self.startLoc] = 1.0
         else:
-            outArray[startLoc:startLoc+n] = 1.0
+            self.outArray[self.startLoc:self.startLoc+self.n] = 1.0
     def update(self):
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
             self.locInt = int(self.LocFloat)
-            self.outArray = numpy.roll(self.outArray, np.sign(speed))
-    def getFullOutArray():
-        if color=='r':
-            returnArray = np.concatenate(outArray, outZeros, outZeros)
-        elif color=='g':
-            returnArray = np.concatenate(outZeros, outArray, outZeros)
-        elif color=='b':
-            returnArray = np.concatenate(outZeros, outZeros, outArray)
+            self.outArray = numpy.roll(self.outArray, np.sign(self.speed))
+    def getFullOutArray(self):
+        if self.color=='r':
+            returnArray = np.concatenate(self.outArray, self.outZeros, self.outZeros)
+        elif self.color=='g':
+            returnArray = np.concatenate(self.outZeros, self.outArray, self.outZeros)
+        elif self.color=='b':
+            returnArray = np.concatenate(self.outZeros, self.outZeros, self.outArray)
         return returnArray
             
     
