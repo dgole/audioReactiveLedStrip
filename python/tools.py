@@ -56,7 +56,7 @@ class Note:
         self.sums = np.ones(12)
         self.matrix = getScalePixelMatrix([0])
         self.alpha = alpha
-        self.noteStringList = ['c', 'cs', 'd', 'ef', 'e', 'f', 'f#', 'g', 'af', 'a', 'bf', 'b' ]
+        self.noteStringList = ['c', 'cs', 'd', 'ef', 'e', 'f', 'fs', 'g', 'af', 'a', 'bf', 'b' ]
         self.uniqueNoteHist = ['aaaa']
     def update(self, newValues):
         newSums = np.dot(self.matrix, newValues)
@@ -68,13 +68,21 @@ class Note:
     def printCurrentNote(self):
         print("most likely note is " + self.noteStringList[self.sums.argmax()])
         print(np.amax(self.sums) / np.sum(self.sums))
+        
+def notePatternCheck(noteObj, notePattern):
+    len = len(notePattern)
+    if noteObj.uniqueNoteHist[-len:] == notePattern:
+        return True
+    else:
+        return False
+        
 
 class Key:
     def __init__(self, matrix, alpha):
         self.keySums = np.ones(12)
         self.matrix = matrix
         self.alpha = alpha
-        self.keyStringList = ['c', 'cs', 'd', 'ef', 'e', 'f', 'f#', 'g', 'af', 'a', 'bf', 'b' ]
+        self.keyStringList = ['c', 'cs', 'd', 'ef', 'e', 'f', 'fs', 'g', 'af', 'a', 'bf', 'b' ]
     def update(self, newValues):
         newKeySums = np.dot(self.matrix, newValues)
         self.keySums = self.alpha * newKeySums + (1.0 - self.alpha) * self.keySums
