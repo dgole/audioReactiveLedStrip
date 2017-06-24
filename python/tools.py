@@ -162,13 +162,12 @@ class Runner:
             self.outArray = numpy.roll(self.outArray, np.sign(self.speed))
     def getFullOutArray(self):
         if self.color=='r':
-            returnArray = np.concatenate(self.outArray, self.outZeros, self.outZeros)
+            return np.concatenate(self.outArray, self.outZeros, self.outZeros)
         elif self.color=='g':
-            returnArray = np.concatenate(self.outZeros, self.outArray, self.outZeros)
+            return np.concatenate(self.outZeros, self.outArray, self.outZeros)
         elif self.color=='b':
-            returnArray = np.concatenate(self.outZeros, self.outZeros, self.outArray)
-        return returnArray
-            
+            return np.concatenate(self.outZeros, self.outZeros, self.outArray)
+                    
     
         
         
