@@ -142,7 +142,38 @@ class Beat:
         else:
             return False
 
-
+class Runner:
+    def __init__(self, n, speed, color, startLoc):
+        self.n = n
+        self.speed = speed
+        self.color = color
+        self.locInt = startLoc
+        self.locFloat = float(startLoc)
+        outArray = np.zeros(config.N_PIXELS)
+        outZeros = np.zeros_like(outArray)
+        if self.speed > 0:
+            outArray[startLoc-n:startLoc] = 1.0
+        else:
+            outArray[startLoc:startLoc+n] = 1.0
+    update(self):
+        self.locFloat = self.locFloat + self.speed
+        if int(self.locFloat) != self.locInt:
+            self.locInt = int(self.LocFloat)
+            self.outArray = numpy.roll(self.outArray, np.sign(speed))
+    getFullOutArray():
+        if color='r':
+            returnArray = np.concatenate(outArray, outZeros, outZeros)
+        elif color='g':
+            returnArray = np.concatenate(outZeros, outArray, outZeros)
+        elif color='b':
+            returnArray = np.concatenate(outZeros, outZeros, outArray)
+        return returnArray
+            
+    
+        
+        
+        
+        
 #####################################
 # Create mel bank to convert frequencies to notes
 #####################################
