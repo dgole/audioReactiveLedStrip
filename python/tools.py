@@ -147,7 +147,7 @@ def melfrequencies_mel_filterbank(num_bands, freq_min, freq_max, num_fft_bands):
     mel_min = hertz_to_mel(freq_min)
     print(freq_min, freq_max)
     print(mel_min, mel_max)
-    delta_mel = abs(mel_max - mel_min) / (num_bands + 1)
+    delta_mel = abs(mel_max - mel_min) / (num_bands)
     delta_hz = linspace(0.0, 44100 / 2.0, num_fft_bands)[1]-linspace(0.0, 44100 / 2.0, num_fft_bands)[0]
     frequencies_mel = mel_min + delta_mel * arange(-1, num_bands + 1)
     center_frequencies_mel = frequencies_mel[1:-1]
