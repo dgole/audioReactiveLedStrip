@@ -161,11 +161,11 @@ class Runner:
             self.locInt = int(self.LocFloat)
             self.outArray = numpy.roll(self.outArray, np.sign(speed))
     def getFullOutArray():
-        if color='r':
+        if color=='r':
             returnArray = np.concatenate(outArray, outZeros, outZeros)
-        elif color='g':
+        elif color=='g':
             returnArray = np.concatenate(outZeros, outArray, outZeros)
-        elif color='b':
+        elif color=='b':
             returnArray = np.concatenate(outZeros, outZeros, outArray)
         return returnArray
             
