@@ -70,8 +70,8 @@ class Note:
         print(np.amax(self.sums) / np.sum(self.sums))
         
 def notePatternCheck(noteObj, notePattern):
-    len = len(notePattern)
-    if noteObj.uniqueNoteHist[-len:] == notePattern:
+    n = len(notePattern)
+    if noteObj.uniqueNoteHist[-n:] == notePattern:
         return True
     else:
         return False
