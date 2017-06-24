@@ -62,7 +62,7 @@ class Note:
         newSums = np.dot(self.matrix, newValues)
         self.sums = self.alpha * newSums + (1.0 - self.alpha) * self.sums
         if (np.amax(self.sums) / np.sum(self.sums)) > self.thresh and self.sums.argmax() != self.uniqueNoteHist[-1]:
-            self.uniqueNoteHist.append(self.noteStringList(self.sums.argmax()))
+            self.uniqueNoteHist.append(self.noteStringList[self.sums.argmax()])
     def printNoteHist(self):
         print("past notes are " + str(self.uniqueNoteHist[-10:]))
     def printCurrentNote(self):
