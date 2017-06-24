@@ -75,7 +75,7 @@ mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, a
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
 count0 = 0
-keyHist = np.zeros(10)
+mode = 0
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, count0
@@ -88,11 +88,25 @@ def visualize_spectrum(y):
     temp2 = ledFilt.update(y)
     if count0%10==0:
         noteObj.printNoteHist()
-        noteObj.printCurrentNote()
-    
-    r = temp2 * 1.0
-    g = temp2 * 0.0
-    b = temp2 * 1.0
+        #noteObj.printCurrentNote()
+    if notePatternCheck(noteObj, ['c','d','c']):
+        mode = 0
+    if notePatternCheck(noteObj, ['c','d','e','d','c']):
+        mode = 1
+    elif notePatternCheck(noteObj, ['c','d','e','f','e','d','c']):
+        mode = 2
+    if mode == 0:
+        r = temp2 * 1.0
+        g = temp2 * 0.0
+        b = temp2 * 0.0
+    if mode == 1:
+        r = temp2 * 0.0
+        g = temp2 * 1.0
+        b = temp2 * 0.0
+    if mode == 2:
+        r = temp2 * 0.0
+        g = temp2 * 0.0
+        b = temp2 * 1.0
     #output = np.array([r,g,b]) * 255
     output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     return output
