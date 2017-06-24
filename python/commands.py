@@ -89,11 +89,11 @@ def visualize_spectrum(y):
     if count0%10==0:
         noteObj.printNoteHist()
         #noteObj.printCurrentNote()
-    if notePatternCheck(noteObj, ['c','d','c']):
+    if tools.notePatternCheck(noteObj, ['c','d','c']):
         mode = 0
-    if notePatternCheck(noteObj, ['c','d','e','d','c']):
+    elif tools.notePatternCheck(noteObj, ['c','d','e','d','c']):
         mode = 1
-    elif notePatternCheck(noteObj, ['c','d','e','f','e','d','c']):
+    elif tools.notePatternCheck(noteObj, ['c','d','e','f','e','d','c']):
         mode = 2
     if mode == 0:
         r = temp2 * 1.0
