@@ -148,7 +148,7 @@ class Runner:
         self.speed = speed
         self.color = color
         self.locInt = startLoc
-        self.locFloat = float(self.startLoc)
+        self.locFloat = float(self.locInt)
         self.outArray = np.zeros(config.N_PIXELS)
         self.outZeros = np.zeros_like(self.outArray)
         if self.speed > 0:
