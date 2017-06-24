@@ -155,12 +155,12 @@ class Runner:
             outArray[startLoc-n:startLoc] = 1.0
         else:
             outArray[startLoc:startLoc+n] = 1.0
-    update(self):
+    def update(self):
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
             self.locInt = int(self.LocFloat)
             self.outArray = numpy.roll(self.outArray, np.sign(speed))
-    getFullOutArray():
+    def getFullOutArray():
         if color='r':
             returnArray = np.concatenate(outArray, outZeros, outZeros)
         elif color='g':
