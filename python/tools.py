@@ -151,10 +151,7 @@ class Runner:
         self.locFloat = float(self.locInt)
         self.outArray = np.zeros(config.N_PIXELS)
         self.outZeros = np.zeros_like(self.outArray)
-        if self.speed > 0:
-            self.outArray[self.locInt-self.n:self.locInt] = 1.0
-        else:
-            self.outArray[self.locInt:self.locInt+self.n] = 1.0
+        self.outArray[self.locInt-self.n:self.locInt+self.n] = 1.0
     def update(self):
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
