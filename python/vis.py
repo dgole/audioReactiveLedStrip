@@ -73,7 +73,7 @@ chordMatrix = tools.getPixelPixelMatrix([0,2,4])
 tonicMatrix = tools.getPixelPixelMatrix([0])
 
 keyObj = tools.Key(determineKeyMatrix, 0.001)
-chordObj = tools.Chord(0.05)
+chordObj = tools.Chord(0.01)
 beatObj = tools.Beat(0.5)
 
 rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
