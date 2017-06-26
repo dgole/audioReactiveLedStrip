@@ -83,8 +83,8 @@ def visualize_spectrum(y):
     runObjList[0].update()
     print(runObjList[0].outArray.shape)
     print(runObjList[0].outZeros.shape)
-    print(225*runObjList[0].getFullOutArray().shape)
-    output = 225*runObjList[0].getFullOutArray()  
+    print(runObjList[0].getFullOutArray().shape)
+    output = runObjList[0].getFullOutArray()  
     return output
 
 
