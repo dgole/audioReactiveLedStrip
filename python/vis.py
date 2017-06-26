@@ -94,9 +94,38 @@ def visualize_spectrum(y):
     beatObj.update(y)
     temp1 = rawFilt.update(y)
     temp2 = ledFilt.update(y)
-    r = temp2 * 1.0
-    g = temp2 * 0.0
-    b = temp2 * 1.0
+    # tonic is blue
+    if chordObj.getChordNum()==0:
+        r = temp2 * 0.0
+        g = temp2 * 0.0
+        b = temp2 * 1.0
+    # ii is yellow
+    elif chordObj.getChordNum()==1:
+        r = temp2 * 0.5
+        g = temp2 * 0.5
+        b = temp2 * 0.0
+    # iii is orange
+    elif chordObj.getChordNum()==2:
+        r = temp2 * 0.66
+        g = temp2 * 0.33
+        b = temp2 * 0.0
+    # IV is green
+    elif chordObj.getChordNum()==3:
+        r = temp2 * 0.0
+        g = temp2 * 1.0
+        b = temp2 * 0.0
+    # V is red
+    elif chordObj.getChordNum()==4:
+        r = temp2 * 1.0
+        g = temp2 * 0.0
+        b = temp2 * 0.0
+    # vi is purple
+    elif chordObj.getChordNum()==5:
+        r = temp2 * 0.5
+        g = temp2 * 0.0
+        b = temp2 * 0.5
+    
+        
     '''
     if beatObj.beatRightNow():
         colorThisTime = (colorThisTime + 1)%3
