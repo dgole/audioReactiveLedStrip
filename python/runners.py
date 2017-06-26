@@ -86,7 +86,7 @@ def visualize_spectrum(y):
         runObjList[j].update()
     output = runObjList[0].getFullOutArray()
     for j in range(len(runObjList)-1):
-        output = runObjList[j+1].getFullOutArray()  
+        output += runObjList[j+1].getFullOutArray()  
     return output
 
 
