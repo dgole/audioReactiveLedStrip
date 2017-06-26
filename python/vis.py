@@ -83,17 +83,21 @@ mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, a
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
 colorThisTime = 0
+count0=0
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, colorThisTime
     #y = np.copy(interpolate(y, config.N_PIXELS))
     _prev_spectrum = np.copy(y)
     # Color channel mappings
+    count+=1
     keyObj.update(y)
     chordObj.update(y, keyObj.getKeyNum())
     beatObj.update(y)
     temp1 = rawFilt.update(y)
     temp2 = ledFilt.update(y)
+    if count%10==0:
+        chordObj.printChord()
     # tonic is blue
     if chordObj.getChordNum()==0:
         r = temp2 * 0.0
