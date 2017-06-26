@@ -81,6 +81,8 @@ def visualize_spectrum(y):
     _prev_spectrum = np.copy(y)
     # Color channel mappings
     runObjList[0].update()
+    print(runObjList[0].outArray.shape)
+    print(runObjList[0].outZeros.shape)
     print(225*runObjList[0].getFullOutArray().shape)
     output = 225*runObjList[0].getFullOutArray()  
     return output
