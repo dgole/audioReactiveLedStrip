@@ -155,7 +155,7 @@ class Runner:
             if i == self.locInt:
                 self.outArray[i] = 1.0
             else:
-                self.outArray[i] = 1.0 - np.abs(i-self.locInt)/n + 0.2
+                self.outArray[i] = 1.0
     def update(self):
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
