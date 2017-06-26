@@ -124,6 +124,10 @@ def visualize_spectrum(y):
         r = temp2 * 0.5
         g = temp2 * 0.0
         b = temp2 * 0.5
+    elif chordObj.getChordNum()==6:
+        r = temp2 * 0.5
+        g = temp2 * 0.5
+        b = temp2 * 0.5
     
         
     '''
