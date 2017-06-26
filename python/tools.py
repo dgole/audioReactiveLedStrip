@@ -159,7 +159,7 @@ class Runner:
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
             self.locInt = int(self.locFloat)
-            self.outArray = numpy.roll(self.outArray, np.sign(self.speed))
+            self.outArray = np.roll(self.outArray, np.sign(self.speed))
     def getFullOutArray(self):
         if self.color=='r':
             r = self.outArray
