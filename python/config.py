@@ -53,7 +53,7 @@ number of bins. More bins is not always better!
 There is no point using more bins than there are pixels on the LED strip.
 """
 
-N_ROLLING_HISTORY = 4
+N_ROLLING_HISTORY = 8
 """Number of past audio frames to include in the rolling window"""
 
 MIN_VOLUME_THRESHOLD = 5e-3
