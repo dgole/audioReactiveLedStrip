@@ -165,17 +165,16 @@ class Runner:
             r = self.outArray
             g = self.outZeros
             b = self.outZeros
-            return np.array([r,g,b]) * 255
         elif self.color=='g':
             r = self.outZeros
             g = self.outArray
             b = self.outZeros
-            return np.array([r,g,b]) * 255
         elif self.color=='b':
             r = self.outZeros
             g = self.outZeros
             b = self.outArray
-            return np.array([r,g,b]) * 255
+	returnArray = np.array([r,g,b])*255
+        return returnArray.astype(int)
                     
     
         
