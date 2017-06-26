@@ -151,7 +151,7 @@ class Runner:
         self.locFloat = float(self.locInt)
         self.outArray = np.zeros(config.N_PIXELS)
         self.outZeros = np.zeros_like(self.outArray)
-        for i in range(self.locInt-self.n, self.locInt+self.n+1]):
+        for i in range(self.locInt-self.n, self.locInt+self.n+1):
             if i == self.locInt:
                 self.outArray[i] = 1.0
             else:
