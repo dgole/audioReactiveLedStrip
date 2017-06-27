@@ -73,12 +73,14 @@ mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, a
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
 runObjList = []
-runObjList.append(tools.Runner(8, 0.133, 'r', 10))
-runObjList.append(tools.Runner(6, 0.0912, 'r', 10))
-runObjList.append(tools.Runner(4, 0.122, 'r', 10))
-runObjList.append(tools.Runner(3, 0.143, 'g', 20))
-runObjList.append(tools.Runner(2, 0.189, 'b', 30))
-runObjList.append(tools.Runner(1, 0.259, 'p', 30))
+colorChoices = ['r','g','b','p']
+for i in range(6):
+    runObjList.append(tools.Runner(np.random.randint(1,8), 
+                                   np.random.random()/2.0, 
+                                   coloChoices[np.random.randint], 
+                                   np.random.randint(0,config.N_PIXELS-1)
+                                  ))
+
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, count0, mode
