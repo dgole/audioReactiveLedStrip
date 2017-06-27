@@ -77,7 +77,7 @@ colorChoices = ['r','g','b','p']
 for i in range(6):
     runObjList.append(tools.Runner(np.random.randint(1,8), 
                                    np.random.random()/2.0, 
-                                   colorChoices[np.random.randint], 
+                                   colorChoices[np.random.randint(0,4)], 
                                    np.random.randint(0,config.N_PIXELS-1)
                                   ))
 
