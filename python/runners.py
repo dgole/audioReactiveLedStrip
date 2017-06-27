@@ -74,8 +74,8 @@ volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_ri
 
 runObjList = []
 colorChoices = ['r','g','b','p']
-for i in range(6):
-    runObjList.append(tools.Runner(np.random.randint(1,8), 
+for i in range(8):
+    runObjList.append(tools.Runner(np.random.randint(1,5), 
                                    np.random.random()/2.0, 
                                    colorChoices[np.random.randint(0,4)], 
                                    np.random.randint(0,config.N_PIXELS-1)
