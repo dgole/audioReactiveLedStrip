@@ -216,8 +216,8 @@ def melfrequencies_mel_filterbank(num_bands, freq_min, freq_max, num_fft_bands):
 		    lower_edges_mel[i] = cent - 0.5  
 		    upper_edges_mel[i] = cent + 0.5
 		else:
-		    lower_edges_mel[i] = cent - 0.75  
-		    upper_edges_mel[i] = cent + 0.75		     
+		    lower_edges_mel[i] = cent - 0.5  
+		    upper_edges_mel[i] = cent + 0.5		     
     return center_frequencies_mel, lower_edges_mel, upper_edges_mel
 def compute_melmat(num_mel_bands, freq_min, freq_max, num_fft_bands, sample_rate):
     center_frequencies_mel, lower_edges_mel, upper_edges_mel =  \
