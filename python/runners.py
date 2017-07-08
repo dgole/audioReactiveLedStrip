@@ -86,7 +86,7 @@ def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, count0, mode
     #y = np.copy(interpolate(y, config.N_PIXELS))
-    _prev_spectrum = np.copy(y)
+    #_prev_spectrum = np.copy(y)
     # Color channel mappings
     for j in range(len(runObjList)):
         runObjList[j].update()
@@ -111,31 +111,31 @@ def microphone_update(audio_samples):
     # Normalize samples between 0 and 1
     y = audio_samples / 2.0**15
     # Construct a rolling window of audio samples
-    y_roll[:-1] = y_roll[1:]
-    y_roll[-1, :] = np.copy(y)
-    y_data = np.concatenate(y_roll, axis=0).astype(np.float32)
-    vol = np.max(np.abs(y_data))
-    if vol < config.MIN_VOLUME_THRESHOLD:
+    #y_roll[:-1] = y_roll[1:]
+    #y_roll[-1, :] = np.copy(y)
+    #y_data = np.concatenate(y_roll, axis=0).astype(np.float32)
+    #vol = np.max(np.abs(y_data))
+    #if vol < config.MIN_VOLUME_THRESHOLD:
         print('No audio input. Volume below threshold. Volume:', vol)
         led.pixels = np.tile(0, (3, config.N_PIXELS))
         led.update()
     else:
         # Transform audio input into the frequency domain
-        N = len(y_data)
+        #N = len(y_data)
         #N_zeros = 2**int(np.ceil(np.log2(N))) - N
         # Pad with zeros until the next power of two
-        y_data *= fft_window
+        #y_data *= fft_window
         #y_padded = np.pad(y_data, (0, N_zeros), mode='constant')
     	#YS = np.abs(np.fft.rfft(y_padded)[:N // 2])
-    	YS = np.abs(np.fft.rfft(y_data)[:N // 2])
-    	XS = np.fft.rfftfreq(N, d = 1.0 / (config.MIC_RATE))
+    	#YS = np.abs(np.fft.rfft(y_data)[:N // 2])
+    	#XS = np.fft.rfftfreq(N, d = 1.0 / (config.MIC_RATE))
         # Construct a Mel filterbank from the FFT data
         # Scale data to values more suitable for visualization
-        mel = np.dot(mel_y, YS)
-        mel = mel**2.0
+        #mel = np.dot(mel_y, YS)
+        #mel = mel**2.0
         # Gain normalization
-        mel_gain.update(np.max(gaussian_filter1d(mel, sigma=1.0)))
-        mel /= mel_gain.value
+        #mel_gain.update(np.max(gaussian_filter1d(mel, sigma=1.0)))
+        #mel /= mel_gain.value
         # Map filterbank output onto LED strip
         output = visualization_effect(mel)
         led.pixels = output
