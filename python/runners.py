@@ -119,7 +119,7 @@ def microphone_update(audio_samples):
         #print('No audio input. Volume below threshold. Volume:', vol)
         #led.pixels = np.tile(0, (3, config.N_PIXELS))
         #led.update()
-    else:
+    #else:
         # Transform audio input into the frequency domain
         #N = len(y_data)
         #N_zeros = 2**int(np.ceil(np.log2(N))) - N
@@ -137,9 +137,9 @@ def microphone_update(audio_samples):
         #mel_gain.update(np.max(gaussian_filter1d(mel, sigma=1.0)))
         #mel /= mel_gain.value
         # Map filterbank output onto LED strip
-        output = visualization_effect(mel)
-        led.pixels = output
-        led.update()
+    output = visualization_effect(mel)
+    led.pixels = output
+    led.update()
     
     if config.DISPLAY_FPS:
         fps = frames_per_second()
