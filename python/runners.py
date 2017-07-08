@@ -162,4 +162,4 @@ if __name__ == '__main__':
     # Initialize LEDs
     led.update()
     # Start listening to live audio stream
-    microphone.start_stream(microphone_update)
+    #microphone.start_stream(microphone_update)
