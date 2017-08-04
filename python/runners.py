@@ -96,7 +96,7 @@ def visualize_spectrum(y):
     #output = np.array([r,g,b]) * 255
     #output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     #output2 = np.array([output,output]).flatten()
-    return output
+    return np.concatenate((output[:, ::-1], output), axis=1)
 
 
 
