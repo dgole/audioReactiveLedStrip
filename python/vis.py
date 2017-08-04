@@ -162,7 +162,7 @@ def visualize_spectrum(y):
     output2 = np.zeros([3, 2*config.N_PIXELS])
     output2[..., 0:config.N_PIXELS] = output
     output2[..., config.N_PIXELS:2*config.N_PIXELS] = output[...,::-1]
-    return output
+    return output2
 
 fft_window = np.hamming(int(config.MIC_RATE / config.FPS) * config.N_ROLLING_HISTORY)
 prev_fps_update = time.time()
