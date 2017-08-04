@@ -159,10 +159,10 @@ def visualize_spectrum(y):
     '''
     #output = np.array([r,g,b]) * 255
     output = np.array([np.ones(config.N_PIXELS), np.ones(config.N_PIXELS), np.ones(config.N_PIXELS)]) * 255
-    output2 = np.zeros([3, 2*config.N_PIXELS])
-    output2[..., 0:config.N_PIXELS] = output
-    output2[..., config.N_PIXELS:2*config.N_PIXELS] = output[...,::-1]
-    return output2
+    #output2 = np.zeros([3, 2*config.N_PIXELS])
+    #output2[..., 0:config.N_PIXELS] = output
+    #output2[..., config.N_PIXELS:2*config.N_PIXELS] = output[...,::-1]
+    return 255 * np.ones([3,150]) 
 
 fft_window = np.hamming(int(config.MIC_RATE / config.FPS) * config.N_ROLLING_HISTORY)
 prev_fps_update = time.time()
