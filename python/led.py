@@ -5,6 +5,8 @@ import platform
 import numpy as np
 import config
 
+local_N_PIXELS = 2*config.N_PIXELS
+
 # ESP8266 uses WiFi communication
 if config.DEVICE == 'esp8266':
     import socket
@@ -12,7 +14,7 @@ if config.DEVICE == 'esp8266':
 # Raspberry Pi controls the LED strip directly
 elif config.DEVICE == 'pi':
     import neopixel
-    strip = neopixel.Adafruit_NeoPixel(config.N_PIXELS, config.LED_PIN,
+    strip = neopixel.Adafruit_NeoPixel(local_N_PIXELS, config.LED_PIN,
                                        config.LED_FREQ_HZ, config.LED_DMA,
                                        config.LED_INVERT, config.BRIGHTNESS)
     strip.begin()
@@ -22,7 +24,7 @@ elif config.DEVICE == 'blinkstick':
     import sys
     #Will turn all leds off when invoked.
     def signal_handler(signal, frame):
-        all_off = [0]*(config.N_PIXELS*3)
+        all_off = [0]*(local_N_PIXELS*3)
         stick.set_led_data(0, all_off)
         sys.exit(0)
 
@@ -34,10 +36,10 @@ elif config.DEVICE == 'blinkstick':
 _gamma = np.load(config.GAMMA_TABLE_PATH)
 """Gamma lookup table used for nonlinear brightness correction"""
 
-_prev_pixels = np.tile(253, (3, config.N_PIXELS))
+_prev_pixels = np.tile(253, (3, local_N_PIXELS))
 """Pixel values that were most recently displayed on the LED strip"""
 
-pixels = np.tile(1, (3, config.N_PIXELS))
+pixels = np.tile(1, (3, local_N_PIXELS))
 """Pixel values for the LED strip"""
 
 _is_python_2 = int(platform.python_version_tuple()[0]) == 2
