@@ -25,7 +25,7 @@ N_PIXELS = 30*5 // 2
 GAMMA_TABLE_PATH = os.path.join(os.path.dirname(__file__), 'gamma_table.npy')
 MIC_RATE = 44100
 """Sampling frequency of the microphone in Hz"""
-FPS = 60
+FPS = 30
 _max_led_FPS = int(((N_PIXELS * 30e-6) + 50e-6)**-1.0)
 assert FPS <= _max_led_FPS, 'FPS must be <= {}'.format(_max_led_FPS)
 
@@ -35,7 +35,8 @@ MIN_FREQUENCY = 130.81 * 1.0
 
 # 4066.84 is b7 and a half
 # 3951.066 is b7
-MAX_FREQUENCY = 3951.066 * 1.0
+#MAX_FREQUENCY = 3951.066 * 1.0
+MAX_FREQUENCY = 9397.27 * 1.0
 """Frequencies above this value will be removed during audio processing"""
 
 N_FFT_BINS = N_PIXELS
