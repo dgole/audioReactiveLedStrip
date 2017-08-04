@@ -95,7 +95,7 @@ def visualize_spectrum(y):
         output += runObjList[j+1].getFullOutArray()
     #output = np.array([r,g,b]) * 255
     #output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
-    output2 = np.flatten(np.array([output,output]))
+    output2 = np.array([output,output]).flatten()
     return output2
 
 
