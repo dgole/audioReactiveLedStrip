@@ -68,7 +68,7 @@ def _update_pi():
     #    print(_prev_pixels.shape)
     #    if np.array_equal(p[:, i], _prev_pixels[:, i]):
     #        continue
-        strip._led_data[i] = rgb[i]
+    strip._led_data[i] = rgb[i]
     _prev_pixels = np.copy(p)
     strip.show()
 
