@@ -12,7 +12,7 @@ if DEVICE == 'pi':
     """LED signal frequency in Hz (usually 800kHz)"""
     LED_DMA = 5
     """DMA channel used for generating PWM signal (try 5)"""
-    BRIGHTNESS = 50
+    BRIGHTNESS = 200
     """Brightness of LED strip between 0 and 255"""
     LED_INVERT = False
     """Set True if using an inverting logic level converter"""
@@ -21,7 +21,7 @@ if DEVICE == 'pi':
 
 USE_GUI = False
 DISPLAY_FPS = True
-N_PIXELS = 240
+N_PIXELS = 120
 GAMMA_TABLE_PATH = os.path.join(os.path.dirname(__file__), 'gamma_table.npy')
 MIC_RATE = 44100
 """Sampling frequency of the microphone in Hz"""
