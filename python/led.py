@@ -62,14 +62,13 @@ def _update_pi():
     b = p[2][:].astype(int)
     rgb = np.bitwise_or(np.bitwise_or(r, g), b)
     # Update the pixels
-    #for i in range(local_N_PIXELS):
+    for i in range(local_N_PIXELS):
         # Ignore pixels if they haven't changed (saves bandwidth)
-    #    print(p.shape)
-    #    print(_prev_pixels.shape)
-    #    if np.array_equal(p[:, i], _prev_pixels[:, i]):
-    #        continue
-        #strip._led_data[i] = rgb[i]
-    strip._led_data = rgb
+        print(p.shape)
+        print(_prev_pixels.shape)
+        if np.array_equal(p[:, i], _prev_pixels[:, i]):
+            continue
+        strip._led_data[i] = rgb[i]
     _prev_pixels = np.copy(p)
     strip.show()
 
