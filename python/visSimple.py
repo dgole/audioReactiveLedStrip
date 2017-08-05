@@ -98,7 +98,7 @@ def visualize_spectrum(y):
     temp2 = ledFilt.update(y)
     #if count0%10==0:
     #    chordObj.printChord()
-    bassPower = np.sum(temp2[0:10])
+    bassPower = np.sum(temp2)
     print(int(bassPower*10))
     r = np.zeros_like(temp1)
     g = np.zeros_like(temp1)
