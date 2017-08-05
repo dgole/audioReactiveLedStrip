@@ -112,24 +112,24 @@ def visualize_spectrum(y):
     g = np.zeros_like(temp1)
     b = np.zeros_like(temp1)
     
-    if 0.0*nFramesCycle < counfEff < 0.3*nFramesCycle:
+    if 0.0*nFramesCycle < countEff < 0.3*nFramesCycle:
         a1 = [1, 0, 0]
         a2 = [0, 0, 1]
-    elif 0.3*nFramesCycle < counfEff < 0.4*nFramesCycle:
+    elif 0.3*nFramesCycle < countEff < 0.4*nFramesCycle:
         temp = 10*(countEff-0.3*nFramesCycle)/nFramesCycle
         a1 = [1-temp, temp, 0] 
         a2 = [temp, 0, 1-temp]
-    elif 0.4*nFramesCycle < counfEff < 0.6*nFramesCycle:
+    elif 0.4*nFramesCycle < countEff < 0.6*nFramesCycle:
         a1 = [0, 1, 0]
         a2 = [1, 0, 0]
-    elif 0.6*nFramesCycle < counfEff < 0.7*nFramesCycle:
+    elif 0.6*nFramesCycle < countEff < 0.7*nFramesCycle:
         temp = 10*(countEff-0.6*nFramesCycle)/nFramesCycle
         a1 = [0, 1-temp, temp] 
         a2 = [1-temp, temp, 0]
-    elif 0.7*nFramesCycle < counfEff < 0.9*nFramesCycle:
+    elif 0.7*nFramesCycle < countEff < 0.9*nFramesCycle:
         a1 = [0, 0, 1]
         a2 = [0, 1, 0]
-    elif 0.9*nFramesCycle < counfEff < 1.0*nFramesCycle:
+    elif 0.9*nFramesCycle < countEff < 1.0*nFramesCycle:
         temp = 10*(countEff-0.9*nFramesCycle)/nFramesCycle
         a1 = [temp, 0, 1-temp] 
         a2 = [0, 1-temp, temp]
