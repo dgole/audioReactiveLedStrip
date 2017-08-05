@@ -84,13 +84,17 @@ volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_ri
 
 colorThisTime = 0
 count0=0
+nFramesCycle = 1000
+a1 = [0,0,0]
+a2 = [0,0,0]
+
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
-    global _prev_spectrum, colorThisTime, count0
+    global _prev_spectrum, colorThisTime, count0, nFramesCycle
     #y = np.copy(interpolate(y, config.N_PIXELS))
     _prev_spectrum = np.copy(y)
     # Color channel mappings
-    #count0+=1
+    count0+=1
     #keyObj.update(y)
     #chordObj.update(y, keyObj.getKeyNum())
     #beatObj.update(y)
@@ -102,20 +106,43 @@ def visualize_spectrum(y):
     bassPower = np.sum(temp2[0:30])*5
     print(int(bassPower))
     iMax = np.min([int((bassPower*10)**0.5),config.N_PIXELS])
+    countEff = count0%nFramesCycle
     
     r = np.zeros_like(temp1)
     g = np.zeros_like(temp1)
     b = np.zeros_like(temp1)
     
-    #r+=0.1
-    #r += np.max(bassPower/config.N_PIXELS, 0.9)
-    #b[0:iMax]=0.3
-    #r[0:iMax]=1.0
-
-    b+=0.1
-    b += np.max(bassPower/config.N_PIXELS, 0.9)
-    b[0:iMax]=1.0
-    r[0:iMax]=0.7
+    if 0.0*nFramesCycle < counfEff < 0.3*nFramesCycle:
+        a1 = [1, 0, 0]
+        a2 = [0, 0, 1]
+    elif 0.3*nFramesCycle < counfEff < 0.4*nFramesCycle:
+        temp = 10*(countEff-0.3*nFramesCycle)/nFramesCycle
+        a1 = [1-temp, temp, 0] 
+        a2 = [temp, 0, 1-temp]
+    elif 0.4*nFramesCycle < counfEff < 0.6*nFramesCycle:
+        a1 = [0, 1, 0]
+        a2 = [1, 0, 0]
+    elif 0.6*nFramesCycle < counfEff < 0.7*nFramesCycle:
+        temp = 10*(countEff-0.6*nFramesCycle)/nFramesCycle
+        a1 = [0, 1-temp, temp] 
+        a2 = [1-temp, temp, 0]
+    elif 0.7*nFramesCycle < counfEff < 0.9*nFramesCycle:
+        a1 = [0, 0, 1]
+        a2 = [0, 1, 0]
+    elif 0.9*nFramesCycle < counfEff < 1.0*nFramesCycle:
+        temp = 10*(countEff-0.9*nFramesCycle)/nFramesCycle
+        a1 = [temp, 0, 1-temp] 
+        a2 = [0, 1-temp, temp]
+        
+    
+    
+    r+=a1[0]*0.1; r+=a1[0]*np.max(bassPower/config.N_PIXELS, 0.9)
+    g+=a1[1]*0.1; g+=a1[1]*np.max(bassPower/config.N_PIXELS, 0.9)
+    b+=a1[2]*0.1; b+=a1[2]*np.max(bassPower/config.N_PIXELS, 0.9)
+    
+    r[0:iMax]=a2[0]*1.0
+    g[0:iMax]=a2[1]*1.0
+    b[0:iMax]=a2[2]*1.0
     
 
     
