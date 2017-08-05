@@ -115,7 +115,7 @@ def visualize_spectrum(y):
     b+=0.1
     b += np.max(bassPower/config.N_PIXELS, 0.9)
     b[0:iMax]=1.0
-    g[0:iMax]=0.7
+    r[0:iMax]=0.7
     
 
     
