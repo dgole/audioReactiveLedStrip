@@ -100,11 +100,11 @@ def visualize_spectrum(y):
     #    chordObj.printChord()
     bassPower = np.sum(temp2)*3
     print(int(bassPower))
-    r = np.zeros_like(temp1)
+    r = np.zeros_like(temp1) + 0.2
     g = np.zeros_like(temp1)
     b = np.zeros_like(temp1)
-    r[0:np.min([int(bassPower),config.N_PIXELS])] = 0.7
-    r += np.max(bassPower,0.3)
+    r[0:np.min([int(bassPower),config.N_PIXELS])]+=0.5
+    r += np.max(bassPower/config.N_PIXELS, 0.3)
     output = np.array([r,g,b]) * 255
     output2 = np.zeros([3, 2*config.N_PIXELS])
     output2[..., 0:config.N_PIXELS] = output[...,::-1]
