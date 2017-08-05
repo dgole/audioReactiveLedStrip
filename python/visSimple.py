@@ -104,7 +104,7 @@ def visualize_spectrum(y):
     g = np.zeros_like(temp1)
     b = np.zeros_like(temp1)
     iMax = np.min([int((bassPower*10)**0.5),config.N_PIXELS]) 
-    b[0:iMax]=1.0
+    b[0:iMax]=0.3
     r[0:iMax]=1.0
     r += np.max(bassPower/config.N_PIXELS, 0.8)
     output = np.array([r,g,b]) * 255
