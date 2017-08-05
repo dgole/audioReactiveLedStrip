@@ -64,8 +64,6 @@ def _update_pi():
     # Update the pixels
     for i in range(local_N_PIXELS):
         # Ignore pixels if they haven't changed (saves bandwidth)
-        print(p.shape)
-        print(_prev_pixels.shape)
         if np.array_equal(p[:, i], _prev_pixels[:, i]):
             continue
         strip._led_data[i] = rgb[i]
