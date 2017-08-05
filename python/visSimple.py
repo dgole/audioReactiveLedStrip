@@ -77,7 +77,7 @@ chordObj = tools.Chord(0.02)
 beatObj = tools.Beat(0.5)
 
 rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
-ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.3, alpha_rise=0.99)
+ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.2, alpha_rise=0.9)
 _prev_spectrum = np.tile(0.01, config.N_PIXELS)
 mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.1, alpha_rise=0.99)
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
