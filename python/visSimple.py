@@ -99,7 +99,7 @@ def visualize_spectrum(y):
     #if count0%10==0:
     #    chordObj.printChord()
     bassPower = np.sum(temp1[0:10])
-    print(bassPower)
+    print(int(bassPower*100))
     r = np.zeros_like(temp1)
     g = np.zeros_like(temp1)
     b = np.zeros_like(temp1)
