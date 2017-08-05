@@ -90,76 +90,24 @@ def visualize_spectrum(y):
     #y = np.copy(interpolate(y, config.N_PIXELS))
     _prev_spectrum = np.copy(y)
     # Color channel mappings
-    count0+=1
-    keyObj.update(y)
-    chordObj.update(y, keyObj.getKeyNum())
-    beatObj.update(y)
+    #count0+=1
+    #keyObj.update(y)
+    #chordObj.update(y, keyObj.getKeyNum())
+    #beatObj.update(y)
     temp1 = rawFilt.update(y)
-    temp2 = ledFilt.update(y)
-    if count0%10==0:
-        chordObj.printChord()
-
-    #r = temp2 * 0.0
-    #g = temp2 * 0.0
-    #b = temp2 * 1.0
-
-    
-    # tonic is blue
-    if chordObj.getChordNum()==0:
-        r = temp2 * 0.0
-        g = temp2 * 0.0
-        b = temp2 * 1.0
-    # ii is yellow
-    elif chordObj.getChordNum()==1:
-        r = temp2 * 0.5
-        g = temp2 * 0.5
-        b = temp2 * 0.0
-    # iii is orange
-    elif chordObj.getChordNum()==2:
-        r = temp2 * 0.66
-        g = temp2 * 0.33
-        b = temp2 * 0.0
-    # IV is green
-    elif chordObj.getChordNum()==3:
-        r = temp2 * 0.0
-        g = temp2 * 1.0
-        b = temp2 * 0.0
-    # V is red
-    elif chordObj.getChordNum()==4:
-        r = temp2 * 1.0
-        g = temp2 * 0.0
-        b = temp2 * 0.0
-    # vi is purple
-    elif chordObj.getChordNum()==5:
-        r = temp2 * 0.5
-        g = temp2 * 0.0
-        b = temp2 * 0.5
-    elif chordObj.getChordNum()==6:
-        r = temp2 * 0.5
-        g = temp2 * 0.5
-        b = temp2 * 0.5
-    
-        
-    '''
-    if beatObj.beatRightNow():
-        colorThisTime = (colorThisTime + 1)%3
-        print("BEAT!!!!")
-    if colorThisTime == 0:
-        r = temp2 * 1.0
-        g = temp2 * 0.0
-        b = temp2 * 0.0
-    elif colorThisTime == 1:
-        r = temp2 * 0.0
-        g = temp2 * 1.0
-        b = temp2 * 0.0
-    if colorThisTime == 2:
-        r = temp2 * 0.0
-        g = temp2 * 0.0
-        b = temp2 * 1.0
-    '''
-    #output = np.array([r,g,b]) * 255
-    output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
-    return output
+    #temp2 = ledFilt.update(y)
+    #if count0%10==0:
+    #    chordObj.printChord()
+    bassPower = np.sum(temp1[0:10])
+    print(bassPower)
+    r = np.ones_like(temp1)
+    g = np.zeros_like(temp1)
+    b = np.zeros_like(temp1)
+    output = np.array([r,g,b]) * 255
+    output2 = np.zeros([3, 2*config.N_PIXELS])
+    output2[..., 0:config.N_PIXELS] = output
+    output2[..., config.N_PIXELS:2*config.N_PIXELS] = output[...,::-1]
+    return output2
 
 fft_window = np.hamming(int(config.MIC_RATE / config.FPS) * config.N_ROLLING_HISTORY)
 prev_fps_update = time.time()
