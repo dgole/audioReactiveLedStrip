@@ -140,14 +140,12 @@ def visualize_spectrum(y):
     g+=a1[1]*0.1; g+=a1[1]*np.max(bassPower/config.N_PIXELS, 0.9)
     b+=a1[2]*0.1; b+=a1[2]*np.max(bassPower/config.N_PIXELS, 0.9)
     
-    r[0:iMax]=a2[0]*1.0
-    r[0:iMax]=a1[0]*1.0
-    
-    g[0:iMax]=a2[1]*1.0
-    g[0:iMax]=a1[1]*1.0
-    
-    b[0:iMax]=a2[2]*1.0
-    b[0:iMax]=a1[2]*1.0
+    r[0:iMax]+=a2[0]*1.0
+    #r[0:iMax]+=a1[0]*1.0
+    g[0:iMax]+=a2[1]*1.0
+    #g[0:iMax]+=a1[1]*1.0
+    b[0:iMax]+=a2[2]*1.0
+    #b[0:iMax]+=a1[2]*1.0
     
 
     
