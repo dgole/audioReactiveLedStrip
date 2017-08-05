@@ -98,15 +98,27 @@ def visualize_spectrum(y):
     temp2 = ledFilt.update(y)
     #if count0%10==0:
     #    chordObj.printChord()
+    
     bassPower = np.sum(temp2[0:30])*5
     print(int(bassPower))
-    r = np.zeros_like(temp1) + 0.1
+    iMax = np.min([int((bassPower*10)**0.5),config.N_PIXELS])
+    
+    r = np.zeros_like(temp1)
     g = np.zeros_like(temp1)
     b = np.zeros_like(temp1)
-    iMax = np.min([int((bassPower*10)**0.5),config.N_PIXELS]) 
-    b[0:iMax]=0.3
-    r[0:iMax]=1.0
-    r += np.max(bassPower/config.N_PIXELS, 0.9)
+    
+    #r+=0.1
+    #r += np.max(bassPower/config.N_PIXELS, 0.9)
+    #b[0:iMax]=0.3
+    #r[0:iMax]=1.0
+
+    b+=0.1
+    b += np.max(bassPower/config.N_PIXELS, 0.9)
+    g[0:iMax]=0.3
+    b[0:iMax]=1.0
+
+    
+    
     output = np.array([r,g,b]) * 255
     output2 = np.zeros([3, 2*config.N_PIXELS])
     output2[..., 0:config.N_PIXELS] = output[...,::-1]
