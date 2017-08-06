@@ -72,6 +72,8 @@ _prev_spectrum = np.tile(0.01, config.N_PIXELS)
 mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
+print(config.N_PIXELS)
+
 runObjList = []
 colorChoices = ['r','g','b','p']
 startColorIndex = np.random.randint(0,4)
