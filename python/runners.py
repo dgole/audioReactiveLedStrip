@@ -5,7 +5,7 @@ import sys
 import numpy as np
 from numpy import *
 from scipy.ndimage.filters import gaussian_filter1d
-import config
+import configRunners as config
 import microphone
 import led
 import tools
