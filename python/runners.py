@@ -5,7 +5,7 @@ import sys
 import numpy as np
 from numpy import *
 from scipy.ndimage.filters import gaussian_filter1d
-import configRunners as config
+import config
 import microphone
 import led
 import tools
@@ -101,7 +101,7 @@ def visualize_spectrum(y):
     output2 = np.zeros([3, 2*config.N_PIXELS])
     output2[..., 0:config.N_PIXELS] = output
     output2[..., config.N_PIXELS:2*config.N_PIXELS] = output[...,::-1]
-    return output
+    return output2
 
 
 
