@@ -99,7 +99,7 @@ def visualize_spectrum(y):
     output2 = np.zeros([3, 2*config.N_PIXELS])
     output2[..., 0:config.N_PIXELS] = output
     output2[..., config.N_PIXELS:2*config.N_PIXELS] = output[...,::-1]
-    return output2
+    return output
 
 
 
