@@ -67,7 +67,7 @@ def interpolate(y, new_length):
 #####################################################
 
 rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
-ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
+ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.2, alpha_rise=0.7)
 _prev_spectrum = np.tile(0.01, config.N_PIXELS)
 mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
@@ -89,12 +89,15 @@ def visualize_spectrum(y):
     global _prev_spectrum, count0, mode
     #y = np.copy(interpolate(y, config.N_PIXELS))
     #_prev_spectrum = np.copy(y)
+    temp2 = ledFilt.update(y)
+    bassPower = np.sum(temp2[0:5])*10
+    print(int(bassPower))
     # Color channel mappings
     for j in range(len(runObjList)):
         runObjList[j].update()
-    output = runObjList[0].getFullOutArray()
+    output = runObjList[0].getFullOutArray()*bassPower
     for j in range(len(runObjList)-1):
-        output += runObjList[j+1].getFullOutArray()
+        output += runObjList[j+1].getFullOutArray()*bassPower
     #output = np.array([r,g,b]) * 255
     #output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     #output2 = np.array([output,output]).flatten()
@@ -125,7 +128,7 @@ def microphone_update(audio_samples):
     vol = np.max(np.abs(y_data))
     if vol < config.MIN_VOLUME_THRESHOLD:
         print('No audio input. Volume below threshold. Volume:', vol)
-        led.pixels = np.tile(0, (3, config.N_PIXELS))
+        led.pixels = np.tile(0, (3, 2*config.N_PIXELS))
         led.update()
     else:
         # Transform audio input into the frequency domain
