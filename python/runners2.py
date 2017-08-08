@@ -91,7 +91,6 @@ def visualize_spectrum(y):
     #_prev_spectrum = np.copy(y)
     temp2 = ledFilt.update(y)
     bassPower = np.sum(temp2[0:5])
-    print(int(bassPower))
     # Color channel mappings
     for j in range(len(runObjList)):
         runObjList[j].update()
