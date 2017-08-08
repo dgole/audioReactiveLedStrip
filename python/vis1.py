@@ -84,7 +84,7 @@ volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_ri
 
 colorThisTime = 0
 count0=0
-nFramesCycle = 2000
+nFramesCycle = 500
 a1 = [0,0,0]
 a2 = [0,0,0]
 
