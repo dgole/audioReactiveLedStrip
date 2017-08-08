@@ -164,7 +164,7 @@ def microphone_update(audio_samples):
     vol = np.max(np.abs(y_data))
     if vol < config.MIN_VOLUME_THRESHOLD:
         print('No audio input. Volume below threshold. Volume:', vol)
-        led.pixels = np.tile(0, (3, config.N_PIXELS))
+        led.pixels = np.tile(0, (3, 2*config.N_PIXELS))
         led.update()
     else:
         # Transform audio input into the frequency domain
