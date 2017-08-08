@@ -103,7 +103,7 @@ def visualize_spectrum(y):
     #if count0%10==0:
     #    chordObj.printChord()
     
-    bassPower = np.sum(temp2[0:30])*5
+    bassPower = np.sum(temp2[0:5])*5
     print(int(bassPower))
     iMax = np.min([int((bassPower*10)**0.5),config.N_PIXELS])
     countEff = count0%nFramesCycle
@@ -141,15 +141,9 @@ def visualize_spectrum(y):
     b+=a1[2]*0.1; b+=a1[2]*np.max(bassPower/config.N_PIXELS, 0.9)
     
     r[0:iMax]+=a2[0]*1.0
-    #r[0:iMax]+=a1[0]*1.0
     g[0:iMax]+=a2[1]*1.0
-    #g[0:iMax]+=a1[1]*1.0
     b[0:iMax]+=a2[2]*1.0
-    #b[0:iMax]+=a1[2]*1.0
-    
-
-    
-    
+   
     output = np.array([r,g,b]) * 255
     output2 = np.zeros([3, 2*config.N_PIXELS])
     output2[..., 0:config.N_PIXELS] = output[...,::-1]
