@@ -12,7 +12,7 @@ if DEVICE == 'pi':
     """LED signal frequency in Hz (usually 800kHz)"""
     LED_DMA = 5
     """DMA channel used for generating PWM signal (try 5)"""
-    BRIGHTNESS = 255
+    BRIGHTNESS = 20
     """Brightness of LED strip between 0 and 255"""
     LED_INVERT = False
     """Set True if using an inverting logic level converter"""
@@ -57,5 +57,5 @@ There is no point using more bins than there are pixels on the LED strip.
 N_ROLLING_HISTORY = 2
 """Number of past audio frames to include in the rolling window"""
 
-MIN_VOLUME_THRESHOLD = 5e-3
+MIN_VOLUME_THRESHOLD = 1e-2
 """No music visualization displayed if recorded audio volume below threshold"""
