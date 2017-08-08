@@ -102,8 +102,8 @@ def visualize_spectrum(y):
     #r = temp2 * 0.0
     #g = temp2 * 0.0
     #b = temp2 * 1.0
-
     
+    '''
     # tonic is blue
     if chordObj.getChordNum()==0:
         r = temp2 * 0.0
@@ -138,6 +138,7 @@ def visualize_spectrum(y):
         r = temp2 * 0.5
         g = temp2 * 0.5
         b = temp2 * 0.5
+    '''
     
         
     '''
