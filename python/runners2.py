@@ -90,13 +90,13 @@ def visualize_spectrum(y):
     #y = np.copy(interpolate(y, config.N_PIXELS))
     #_prev_spectrum = np.copy(y)
     temp2 = ledFilt.update(y)
-    bassPower = np.sum(temp2[0:5])
+    bassPower = np.sum(temp2[0:5])*0.5
     # Color channel mappings
     for j in range(len(runObjList)):
         runObjList[j].update()
-    output = runObjList[0].getFullOutArray()*bassPower
+    output = runObjList[0].getFullOutArray()*(bassPower+0.1)
     for j in range(len(runObjList)-1):
-        output += runObjList[j+1].getFullOutArray()*bassPower
+        output += runObjList[j+1].getFullOutArray()*(bassPower+0.1)
     #output = np.array([r,g,b]) * 255
     #output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     #output2 = np.array([output,output]).flatten()
