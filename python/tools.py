@@ -7,7 +7,7 @@ from numpy import *
 from scipy.ndimage.filters import gaussian_filter1d
 import config
 
-local_N_PIXELS = config.N_PIXELS
+local_N_PIXELS = config.N_PIXELS // config.calcFactor
 
 #####################################
 # Matricies to do the music manipulations
