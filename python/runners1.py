@@ -79,7 +79,7 @@ colorChoices = ['r','g','b','p']
 startColorIndex = np.random.randint(0,4)
 for i in range(int(sys.argv[1])):
     runObjList.append(tools.Runner(np.random.randint(int(sys.argv[2]),int(sys.argv[3])), 
-                                   np.random.random()/2.0 + 0.05, 
+                                   np.random.random()/1.0 + 0.1, 
                                    colorChoices[(startColorIndex+i)%4], 
                                    np.random.randint(10,config.N_PIXELS-10)
                                   ))
