@@ -100,8 +100,16 @@ def visualize_spectrum(y):
     #output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     #output2 = np.array([output,output]).flatten()
     output2 = np.zeros([3, config.N_PIXELS])
-    output2[..., 0:local_N_PIXELS] = output
-    output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
+    if config.calcFactor == 1:
+        output2 = output
+    elif config.calcFactor == 2:
+        output2[..., 0:local_N_PIXELS] = output
+        output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
+    elif config.calcFactor == 4:
+        output2[..., 0:local_N_PIXELS] = output
+        output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
+        output2[..., 2*local_N_PIXELS:3*local_N_PIXELS] = output
+        output2[..., 3*local_N_PIXELS:4*local_N_PIXELS] = output[...,::-1]
     return output2
 
 
