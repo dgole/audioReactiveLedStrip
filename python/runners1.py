@@ -106,10 +106,11 @@ def visualize_spectrum(y):
         output2[..., 0:local_N_PIXELS] = output
         output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
     elif config.calcFactor == 4:
-        output2[..., 0:local_N_PIXELS] = output
-        output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
+        output2[..., 0*local_N_PIXELS:1*local_N_PIXELS] = output
+        output2[..., 1*local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
         output2[..., 2*local_N_PIXELS:3*local_N_PIXELS] = output
         output2[..., 3*local_N_PIXELS:4*local_N_PIXELS] = output[...,::-1]
+    print(output2.shape)
     return output2
 
 
