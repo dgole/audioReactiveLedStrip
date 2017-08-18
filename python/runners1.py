@@ -10,6 +10,8 @@ import microphone
 import led
 import tools
 
+local_N_PIXELS = config.N_PIXELS // config.calcFactor
+
 def create_mel_bank():
     global samples, mel_y, mel_x
     samples = int(config.MIC_RATE * config.N_ROLLING_HISTORY / (2.0 * config.FPS))
@@ -66,13 +68,12 @@ def interpolate(y, new_length):
 # CHANGE STUFF BELOW THIS ###########################
 #####################################################
 
-rawFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
-ledFilt = tools.ExpFilter(np.tile(0.01, config.N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
-_prev_spectrum = np.tile(0.01, config.N_PIXELS)
+rawFilt = tools.ExpFilter(np.tile(0.01, local_N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
+ledFilt = tools.ExpFilter(np.tile(0.01, local_N_PIXELS), alpha_decay=0.1, alpha_rise=0.7)
+_prev_spectrum = np.tile(0.01, local_N_PIXELS)
 mel_gain = tools.ExpFilter(np.tile(1e-1, config.N_FFT_BINS), alpha_decay=0.05, alpha_rise=0.99)
 volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_rise=0.02)
 
-print(config.N_PIXELS)
 
 runObjList = []
 colorChoices = ['r','g','b','p']
@@ -81,13 +82,13 @@ for i in range(int(sys.argv[1])):
     runObjList.append(tools.Runner(np.random.randint(int(sys.argv[2]),int(sys.argv[3])), 
                                    np.random.random()/1.0 + 0.1, 
                                    colorChoices[(startColorIndex+i)%4], 
-                                   np.random.randint(10,config.N_PIXELS-10)
+                                   np.random.randint(10,local_N_PIXELS-10)
                                   ))
 
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, count0, mode
-    #y = np.copy(interpolate(y, config.N_PIXELS))
+    #y = np.copy(interpolate(y, local_N_PIXELS))
     #_prev_spectrum = np.copy(y)
     # Color channel mappings
     for j in range(len(runObjList)):
@@ -98,9 +99,9 @@ def visualize_spectrum(y):
     #output = np.array([r,g,b]) * 255
     #output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     #output2 = np.array([output,output]).flatten()
-    output2 = np.zeros([3, 2*config.N_PIXELS])
-    output2[..., 0:config.N_PIXELS] = output
-    output2[..., config.N_PIXELS:2*config.N_PIXELS] = output[...,::-1]
+    output2 = np.zeros([3, config.N_PIXELS])
+    output2[..., 0:local_N_PIXELS] = output
+    output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
     return output2
 
 
@@ -125,7 +126,7 @@ def microphone_update(audio_samples):
     vol = np.max(np.abs(y_data))
     if vol < config.MIN_VOLUME_THRESHOLD:
         print('No audio input. Volume below threshold. Volume:', vol)
-        led.pixels = np.tile(0, (3, config.N_PIXELS))
+        led.pixels = np.tile(0, (3, local_N_PIXELS))
         led.update()
     else:
         # Transform audio input into the frequency domain
