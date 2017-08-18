@@ -39,7 +39,7 @@ MIN_FREQUENCY = 130.81 * 1.0
 MAX_FREQUENCY = 9397.27 * 0.1
 """Frequencies above this value will be removed during audio processing"""
 
-N_FFT_BINS = N_PIXELS
+N_FFT_BINS = N_PIXELS // 4
 """Number of frequency bins to use when transforming audio to frequency domain
 
 Fast Fourier transforms are used to transform time-domain audio data to the
