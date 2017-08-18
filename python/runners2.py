@@ -87,7 +87,7 @@ for i in range(int(sys.argv[1])):
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, count0, mode
-    #y = np.copy(interpolate(y, local_N_PIXELS))
+    y = np.copy(interpolate(y, local_N_PIXELS))
     #_prev_spectrum = np.copy(y)
     temp2 = ledFilt.update(y)
     bassPower = np.sum(temp2[0:5])*0.5
@@ -100,11 +100,11 @@ def visualize_spectrum(y):
     #output = np.array([r,g,b]) * 255
     #output = np.array([np.flipud(r),np.flipud(g),np.flipud(b)]) * 255
     #output2 = np.array([output,output]).flatten()
-    output2 = np.zeros([3, 2*local_N_PIXELS])
-    output2[..., 0:local_N_PIXELS] = output
-    output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
-    return output2
-
+    #output2 = np.zeros([3, 2*local_N_PIXELS])
+    #output2[..., 0:local_N_PIXELS] = output
+    #output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
+    #return output2
+    return output
 
 
 
