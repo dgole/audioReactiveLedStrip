@@ -7,14 +7,16 @@ from numpy import *
 from scipy.ndimage.filters import gaussian_filter1d
 import config
 
+local_N_PIXELS = config.N_PIXELS
+
 #####################################
 # Matricies to do the music manipulations
 #####################################
 # this is pixels x pixels, picks out certain notes based on given scale
 def getPixelPixelMatrix(noteList):
-    matrix = np.zeros([config.N_PIXELS, config.N_PIXELS])
-    for i in range(config.N_PIXELS):
-        for j in range(config.N_PIXELS):
+    matrix = np.zeros([local_N_PIXELS, local_N_PIXELS])
+    for i in range(local_N_PIXELS):
+        for j in range(local_N_PIXELS):
             if (j-i%12)%12 in noteList:
                 matrix[i, j] = 1.0
             else:
@@ -22,9 +24,9 @@ def getPixelPixelMatrix(noteList):
     return matrix
 # this is 12 x pixels, lets you sum up how much of the given scale is in the spectrum for each possible key
 def getScalePixelMatrix(noteList):
-    matrix = np.zeros([12, config.N_PIXELS])
+    matrix = np.zeros([12, local_N_PIXELS])
     for i in range(12):
-        for j in range(config.N_PIXELS):
+        for j in range(local_N_PIXELS):
             if (j-i%12)%12 in noteList:
                 matrix[i, j] = 1.0
             else:
@@ -99,10 +101,10 @@ class Chord:
         chordRefMatrix = np.array([[0,4,7], [2,5,9], [4,7,11], [5,9,11], [7,11,2], [9,0,4], [11,2,5]])
         self.chordMatrixList = []
         for i in range(12):
-            self.chordMatrixList.append(np.zeros([7,config.N_PIXELS]))
+            self.chordMatrixList.append(np.zeros([7,local_N_PIXELS]))
         for keyNum in range(12):
             for chordNum in range(7):
-                for pixelNum in range(config.N_PIXELS):
+                for pixelNum in range(local_N_PIXELS):
                     if (pixelNum-keyNum%12)%12 in chordRefMatrix[chordNum]:
                         self.chordMatrixList[keyNum][chordNum, pixelNum] = 1.0
                     else:
@@ -123,10 +125,10 @@ class Chord:
 class Beat:
     def __init__(self, alpha):
         self.alpha = alpha
-        self.matrix = np.zeros(config.N_PIXELS)
+        self.matrix = np.zeros(local_N_PIXELS)
         self.sum = 0.0
         self.oldSum = 0.0
-        for i in range(config.N_PIXELS):
+        for i in range(local_N_PIXELS):
             if i<9:
                 self.matrix[i] = 1.0
             else:
@@ -149,7 +151,7 @@ class Runner:
         self.color = color
         self.locInt = startLoc
         self.locFloat = float(self.locInt)
-        self.outArray = np.zeros(config.N_PIXELS)
+        self.outArray = np.zeros(local_N_PIXELS)
         self.outZeros = np.zeros_like(self.outArray)
         for i in range(self.locInt-self.n, self.locInt+self.n+1):
             if i == self.locInt:
@@ -161,7 +163,7 @@ class Runner:
         if int(self.locFloat) != self.locInt:
             self.locInt = int(self.locFloat)
             self.outArray = np.roll(self.outArray, int(np.sign(self.speed)))
-        if self.locInt == 0 or self.locInt == config.N_PIXELS-1:
+        if self.locInt == 0 or self.locInt == local_N_PIXELS-1:
             self.speed = -self.speed            
     def getFullOutArray(self):
         if self.color=='r':
