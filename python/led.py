@@ -5,7 +5,7 @@ import platform
 import numpy as np
 import config
 
-local_N_PIXELS = config.N_PIXELS
+local_N_PIXELS = config.N_PIXELS // config.calcFactor
 
 # ESP8266 uses WiFi communication
 if config.DEVICE == 'esp8266':
