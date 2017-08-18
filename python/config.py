@@ -21,7 +21,7 @@ if DEVICE == 'pi':
 
 USE_GUI = False
 DISPLAY_FPS = True
-N_PIXELS = 30*5 
+N_PIXELS = 30*5*2 
 GAMMA_TABLE_PATH = os.path.join(os.path.dirname(__file__), 'gamma_table.npy')
 MIC_RATE = 44100
 """Sampling frequency of the microphone in Hz"""
@@ -39,7 +39,7 @@ MIN_FREQUENCY = 130.81 * 1.0
 MAX_FREQUENCY = 9397.27 * 0.1
 """Frequencies above this value will be removed during audio processing"""
 
-N_FFT_BINS = N_PIXELS // 4
+N_FFT_BINS = N_PIXELS // 5
 """Number of frequency bins to use when transforming audio to frequency domain
 
 Fast Fourier transforms are used to transform time-domain audio data to the
