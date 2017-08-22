@@ -21,8 +21,8 @@ if DEVICE == 'pi':
 
 USE_GUI = False
 DISPLAY_FPS = True
-N_PIXELS = 30*5*2 // 1
-calcFactor = 4
+N_PIXELS = 30*5
+calcFactor = 2
 GAMMA_TABLE_PATH = os.path.join(os.path.dirname(__file__), 'gamma_table.npy')
 MIC_RATE = 44100
 """Sampling frequency of the microphone in Hz"""
