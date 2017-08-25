@@ -132,7 +132,7 @@ def visualize_spectrum(y):
     #b = temp2 * 1.0
     
     r=a1[0]*temp2
-    g=a1[1]*temp21;
+    g=a1[1]*temp2;
     b=a1[2]*temp2;
     
     '''
