@@ -74,10 +74,10 @@ pentatonicMatrix = tools.getPixelPixelMatrix([0,2,4,7,9])
 chordMatrix = tools.getPixelPixelMatrix([0,2,4])
 tonicMatrix = tools.getPixelPixelMatrix([0])
 
-onlyLowStuff = np.zeros(local_N_PIXELS)
+noHighStuff = np.zeros(local_N_PIXELS)
 for i in range(local_N_PIXELS):
     if i < 48:
-        onlyLowStuff[i] = 1
+        noHighStuff[i] = 1
     
 
 keyObj = tools.Key(determineKeyMatrix, 0.001)
@@ -100,7 +100,7 @@ def visualize_spectrum(y):
     global _prev_spectrum, colorThisTime, count0
     #y = np.copy(interpolate(y, local_N_PIXELS))
     _prev_spectrum = np.copy(y)
-    y = y*onlyLowerStuff
+    y = y*noHighStuff
     # Color channel mappings
     count0+=1
     keyObj.update(y)
