@@ -36,8 +36,8 @@ MIN_FREQUENCY = 130.81 * 1.0
 
 # 4066.84 is b7 and a half
 # 3951.066 is b7
-MAX_FREQUENCY = 3951.066 * 1.0
-#MAX_FREQUENCY = 9397.27 * 0.1
+#MAX_FREQUENCY = 3951.066 * 1.0
+MAX_FREQUENCY = 9397.27 * 0.1
 """Frequencies above this value will be removed during audio processing"""
 
 N_FFT_BINS = 75
