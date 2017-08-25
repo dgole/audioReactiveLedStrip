@@ -101,9 +101,9 @@ def visualize_spectrum(y):
     if count0%10==0:
         chordObj.printChord()
 
-    #r = temp2 * 0.0
-    #g = temp2 * 0.0
-    #b = temp2 * 1.0
+    r = temp2 * 0.0
+    g = temp2 * 0.0
+    b = temp2 * 1.0
     
     '''
     # tonic is blue
