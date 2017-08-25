@@ -67,16 +67,16 @@ def interpolate(y, new_length):
     return z
 
 # Define a bunch of these matricies
-determineKeyMatrix = tools.getScalePixelMatrix([0,2,4,7,9,11])
-diatonicMatrix = tools.getPixelPixelMatrix([0,2,4,5,7,9,11])
-nonDiatonicMatrix = tools.getPixelPixelMatrix([1,3,6,10])
-pentatonicMatrix = tools.getPixelPixelMatrix([0,2,4,7,9])
-chordMatrix = tools.getPixelPixelMatrix([0,2,4])
-tonicMatrix = tools.getPixelPixelMatrix([0])
+#determineKeyMatrix = tools.getScalePixelMatrix([0,2,4,7,9,11])
+#diatonicMatrix = tools.getPixelPixelMatrix([0,2,4,5,7,9,11])
+#nonDiatonicMatrix = tools.getPixelPixelMatrix([1,3,6,10])
+#pentatonicMatrix = tools.getPixelPixelMatrix([0,2,4,7,9])
+#chordMatrix = tools.getPixelPixelMatrix([0,2,4])
+#tonicMatrix = tools.getPixelPixelMatrix([0])
 
-keyObj = tools.Key(determineKeyMatrix, 0.001)
-chordObj = tools.Chord(0.02)
-beatObj = tools.Beat(0.5)
+#keyObj = tools.Key(determineKeyMatrix, 0.001)
+#chordObj = tools.Chord(0.02)
+#beatObj = tools.Beat(0.5)
 
 rawFilt = tools.ExpFilter(np.tile(0.01, local_N_PIXELS), alpha_decay=0.99, alpha_rise=0.99)
 ledFilt = tools.ExpFilter(np.tile(0.01, local_N_PIXELS), alpha_decay=0.2, alpha_rise=0.7)
