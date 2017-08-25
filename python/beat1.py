@@ -106,7 +106,7 @@ def visualize_spectrum(y):
     #    chordObj.printChord()
     
     bassPower = np.sum(temp2[0:5])*10
-    print(int(bassPower))
+    #print(int(bassPower))
     iMax = np.min([int((bassPower*10)**0.5),local_N_PIXELS])
     countEff = count0%nFramesCycle
     
@@ -148,8 +148,8 @@ def visualize_spectrum(y):
    
     output = np.array([r,g,b]) * 255
     output2 = np.zeros([3, config.N_PIXELS])
-    output2[..., 0:local_N_PIXELS] = output
-    output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
+    output2[..., 0:local_N_PIXELS] = output[...,::-1]
+    output2[..., local_N_PIXELS:2*local_N_PIXELS] = output
     return output2
 
 fft_window = np.hamming(int(config.MIC_RATE / config.FPS) * config.N_ROLLING_HISTORY)
