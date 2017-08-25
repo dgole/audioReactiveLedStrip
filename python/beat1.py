@@ -93,7 +93,7 @@ a2 = [0,0,0]
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, colorThisTime, count0, nFramesCycle, a1, a2
-    #y = np.copy(interpolate(y, local_N_PIXELS))
+    y = np.copy(interpolate(y, local_N_PIXELS))
     _prev_spectrum = np.copy(y)
     # Color channel mappings
     count0+=1
