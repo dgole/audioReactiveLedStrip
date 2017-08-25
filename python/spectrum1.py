@@ -105,7 +105,7 @@ def visualize_spectrum(y):
     if count0%10==0:
         chordObj.printChord()
 
-    if 0.0*nFramesCycle < countEff <= 0.1*nFramesCycle:
+    if 0.0*nFramesCycle <= countEff <= 0.1*nFramesCycle:
         a1 = [1, 0, 0]
         a2 = [0, 0, 1]
     elif 0.1*nFramesCycle < countEff <= 0.4*nFramesCycle:
