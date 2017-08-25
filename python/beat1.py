@@ -147,6 +147,7 @@ def visualize_spectrum(y):
     b[0:iMax]+=a2[2]*1.0
    
     output = np.array([r,g,b]) * 255
+    output2 = np.zeros([3, config.N_PIXELS])
     output2[..., 0:local_N_PIXELS] = output
     output2[..., local_N_PIXELS:2*local_N_PIXELS] = output[...,::-1]
     return output2
