@@ -212,8 +212,8 @@ def melfrequencies_mel_filterbank(num_bands, freq_min, freq_max, num_fft_bands):
 		cent = center_frequencies_mel[i]
 		delCent =  mel_to_hertz(cent+1) - mel_to_hertz(cent)
 		if delta_hz > delCent:
-		    lower_edges_mel[i] = cent - 1.5  
-		    upper_edges_mel[i] = cent + 1.5
+		    lower_edges_mel[i] = cent - 0.75  
+		    upper_edges_mel[i] = cent + 0.75
 		elif delta_hz < 0.5 * delCent:
 		    lower_edges_mel[i] = cent - 0.5  
 		    upper_edges_mel[i] = cent + 0.5
