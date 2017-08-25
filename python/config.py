@@ -58,5 +58,5 @@ There is no point using more bins than there are pixels on the LED strip.
 N_ROLLING_HISTORY = 2
 """Number of past audio frames to include in the rolling window"""
 
-MIN_VOLUME_THRESHOLD = 1e-2
+MIN_VOLUME_THRESHOLD = 1e-3
 """No music visualization displayed if recorded audio volume below threshold"""
