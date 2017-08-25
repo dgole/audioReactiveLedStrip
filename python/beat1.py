@@ -195,7 +195,7 @@ def microphone_update(audio_samples):
         if time.time() - 2.0 > prev_fps_update:
             prev_fps_update = time.time()
             print('FPS {:.0f} / {:.0f}'.format(fps, config.FPS))
-            keyObj.printKey()
+            #keyObj.printKey()
    
                 
 
