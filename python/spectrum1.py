@@ -86,6 +86,9 @@ volume = tools.ExpFilter(config.MIN_VOLUME_THRESHOLD, alpha_decay=0.02, alpha_ri
 
 colorThisTime = 0
 count0=0
+nFramesCycle = 1000
+a1 = [0,0,0]
+a2 = [0,0,0]
 def visualize_spectrum(y):
     """Effect that maps the Mel filterbank frequencies onto the LED strip"""
     global _prev_spectrum, colorThisTime, count0
@@ -98,14 +101,41 @@ def visualize_spectrum(y):
     beatObj.update(y)
     temp1 = rawFilt.update(y)
     temp2 = ledFilt.update(y)
+    countEff = count0%nFramesCycle
     if count0%10==0:
         chordObj.printChord()
 
-    r = temp2 * 0.0
-    g = temp2 * 0.0
-    b = temp2 * 1.0
+    if 0.0*nFramesCycle < countEff < 0.1*nFramesCycle:
+        a1 = [1, 0, 0]
+        a2 = [0, 0, 1]
+    elif 0.1*nFramesCycle < countEff < 0.4*nFramesCycle:
+        temp = (1/0.3)*(countEff-0.1*nFramesCycle)/nFramesCycle
+        a1 = [1-temp, temp, 0] 
+        a2 = [temp, 0, 1-temp]
+    elif 0.4*nFramesCycle < countEff < 0.5*nFramesCycle:
+        a1 = [0, 1, 0]
+        a2 = [1, 0, 0]
+    elif 0.5*nFramesCycle < countEff < 0.7*nFramesCycle:
+        temp = (1/0.2)*(countEff-0.5*nFramesCycle)/nFramesCycle
+        a1 = [0, 1-temp, temp] 
+        a2 = [1-temp, temp, 0]
+    elif 0.7*nFramesCycle < countEff < 0.8*nFramesCycle:
+        a1 = [0, 0, 1]
+        a2 = [0, 1, 0]
+    elif 0.8*nFramesCycle < countEff < 1.0*nFramesCycle:
+        temp = (1/0.2)*(countEff-0.8*nFramesCycle)/nFramesCycle
+        a1 = [temp, 0, 1-temp] 
+        a2 = [0, 1-temp, temp]
+        
+    #r = temp2 * 0.0
+    #g = temp2 * 0.0
+    #b = temp2 * 1.0
     
+    r=a1[0]*temp2
+    g=a1[1]*temp21;
+    b=a1[2]*temp2;
     
+    '''
     # tonic is blue
     if chordObj.getChordNum()==0:
         r = temp2 * 0.0
@@ -140,7 +170,7 @@ def visualize_spectrum(y):
         r = temp2 * 0.5
         g = temp2 * 0.5
         b = temp2 * 0.5
-    
+    '''
     
         
     '''
