@@ -6,7 +6,7 @@ import os
 DEVICE = 'pi'
 
 if DEVICE == 'pi':
-    LED_PIN = 18
+    LED_PIN = 12
     """GPIO pin connected to the LED strip pixels (must support PWM)"""
     LED_FREQ_HZ = 800000
     """LED signal frequency in Hz (usually 800kHz)"""
