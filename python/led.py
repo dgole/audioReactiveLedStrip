@@ -33,8 +33,24 @@ elif config.DEVICE == 'blinkstick':
     signal.signal(signal.SIGTERM, signal_handler)
     signal.signal(signal.SIGINT, signal_handler)
 
-# elif config.DEVICE == 'screen':
-#
+elif config.DEVICE == 'screen':
+    import sys
+    # the mock-0.3.1 dir contains testcase.py, testutils.py & mock.py
+    sys.path.append('../../light_panel/')
+    from classes import Panel
+    from pixel import *
+    # import imp
+    # foo = imp.load_source('classes.Panel', '../../light_panel/')
+    # # foo.Panel()
+    m = 1 #num rows
+    n = local_N_PIXELS #num columns
+    pix_num = m * n
+    my_panel_shapes = [ [1 for c in range(n)] for r in range(m) ]
+    my_panel = Panel(m,n,pix_num,my_panel_shapes, "vis")
+    from panel_visualizer import PanelVisualizer
+    visualizer = PanelVisualizer(m, n)
+    pixel_arr = [ [Pixel(20,50,80) for i in range( my_panel.n ) ] for j in range(my_panel.m) ]
+
 
 _gamma = np.load(config.GAMMA_TABLE_PATH)
 """Gamma lookup table used for nonlinear brightness correction"""
@@ -73,6 +89,17 @@ def _update_pi():
     _prev_pixels = np.copy(p)
     strip.show()
 
+def simple_pixels(self):
+    print("running simple_pixels")
+    # pixel_arr = [ [0 for i in range( panel.numRows ) ] for j in range(panel.numColumns) ]
+    #move through each row
+    for i in range( self.panel.m):
+        #move through the column
+        for j in range( self.panel.n ):
+            self.pixel_arr[i][j] = Pixel( i*(220/self.panel.m) , j*(220/self.panel.n) , i+j)
+    # self.panel.display_visualizer_panel(self.pixel_arr)
+    return self.pixel_arr
+
 def update():
     """Updates the LED strip values"""
     if config.DEVICE == 'esp8266':
@@ -84,6 +111,8 @@ def update():
     elif config.DEVICE == 'screen':
         # _update_blinkstick()
         print("screen time")
+        visualizer.display_visualizer_panel(pixel_arr)
+        # my_panel.update_panel( pixel_arr );
     else:
         raise ValueError('Invalid device selected')
 
