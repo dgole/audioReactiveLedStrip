@@ -33,6 +33,9 @@ elif config.DEVICE == 'blinkstick':
     signal.signal(signal.SIGTERM, signal_handler)
     signal.signal(signal.SIGINT, signal_handler)
 
+# elif config.DEVICE == 'screen':
+#
+
 _gamma = np.load(config.GAMMA_TABLE_PATH)
 """Gamma lookup table used for nonlinear brightness correction"""
 
@@ -78,6 +81,9 @@ def update():
         _update_pi()
     elif config.DEVICE == 'blinkstick':
         _update_blinkstick()
+    elif config.DEVICE == 'screen':
+        # _update_blinkstick()
+        print("screen time")
     else:
         raise ValueError('Invalid device selected')
 

@@ -3,7 +3,8 @@ from __future__ import print_function
 from __future__ import division
 import os
 
-DEVICE = 'pi'
+# DEVICE = 'pi'
+DEVICE = 'screen'
 
 if DEVICE == 'pi':
     LED_PIN = 12
@@ -18,10 +19,14 @@ if DEVICE == 'pi':
     """Set True if using an inverting logic level converter"""
     SOFTWARE_GAMMA_CORRECTION = True
     """Set to True because Raspberry Pi doesn't use hardware dithering"""
+    USE_GUI = False
+    DISPLAY_FPS = True
+    N_PIXELS = 30*5
 
-USE_GUI = False
-DISPLAY_FPS = True
-N_PIXELS = 30*5
+if DEVICE == 'screen':
+    USE_GUI = True
+    DISPLAY_FPS = True
+    N_PIXELS = 30*5
 calcFactor = 2
 GAMMA_TABLE_PATH = os.path.join(os.path.dirname(__file__), 'gamma_table.npy')
 MIC_RATE = 44100

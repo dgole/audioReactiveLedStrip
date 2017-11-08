@@ -1,0 +1,8 @@
+Steve's notes getting this thing up and running Nov 8 2017
+
+- The readme says vis.py is the main program, but that fle doesn't eem to exist in this repo
+- When I try to run spectrum1.py or visualizationOriginal.py on my mbp I get an error saying there's no pyaudio
+	Fixed by running
+			brew install portaudio
+			and then pip install pyaudio
+- Is this meant for python 2 or 3?
