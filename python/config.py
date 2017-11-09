@@ -27,6 +27,7 @@ if DEVICE == 'screen':
     USE_GUI = False
     DISPLAY_FPS = False
     N_PIXELS = 30*5
+    SOFTWARE_GAMMA_CORRECTION = False
 calcFactor = 2
 GAMMA_TABLE_PATH = os.path.join(os.path.dirname(__file__), 'gamma_table.npy')
 MIC_RATE = 44100

@@ -5,4 +5,5 @@ Steve's notes getting this thing up and running Nov 8 2017
 	Fixed by running
 			brew install portaudio
 			and then pip install pyaudio
-- Is this meant for python 2 or 3?
+- Is this meant for python 2 or 3? Runs well w/ python 2
+- it looks like the currnt scheme requires a certain number of LEDs

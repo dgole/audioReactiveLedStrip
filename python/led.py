@@ -38,7 +38,7 @@ elif config.DEVICE == 'screen':
     # the mock-0.3.1 dir contains testcase.py, testutils.py & mock.py
     sys.path.append('../../light_panel/')
     from classes import Panel
-    from pixel import *
+    from classes import Pixel
     # import imp
     # foo = imp.load_source('classes.Panel', '../../light_panel/')
     # # foo.Panel()
@@ -73,6 +73,7 @@ def _update_pi():
     global pixels, _prev_pixels
     # Truncate values and cast to integer
     pixels = np.clip(pixels, 0, 255).astype(int)
+
     # Optional gamma correction
     p = _gamma[pixels] if config.SOFTWARE_GAMMA_CORRECTION else np.copy(pixels)
     # Encode 24-bit LED values in 32 bit integers
@@ -89,16 +90,23 @@ def _update_pi():
     _prev_pixels = np.copy(p)
     strip.show()
 
-def simple_pixels(self):
-    print("running simple_pixels")
-    # pixel_arr = [ [0 for i in range( panel.numRows ) ] for j in range(panel.numColumns) ]
-    #move through each row
-    for i in range( self.panel.m):
-        #move through the column
-        for j in range( self.panel.n ):
-            self.pixel_arr[i][j] = Pixel( i*(220/self.panel.m) , j*(220/self.panel.n) , i+j)
-    # self.panel.display_visualizer_panel(self.pixel_arr)
-    return self.pixel_arr
+def update_screen():
+    global pixels
+    pixels = np.clip(pixels, 0, 255).astype(int)
+    # Optional gamma correction
+    p = _gamma[pixels] if config.SOFTWARE_GAMMA_CORRECTION else np.copy(pixels)
+    # Encode 24-bit LED values in 32 bit integers
+    r = p[0][:].astype(int)
+    g = p[1][:].astype(int)
+    b = p[2][:].astype(int)
+    for i in range(local_N_PIXELS):
+        # Ignore pixels if they haven't changed (saves bandwidth)
+        if np.array_equal(p[:, i], _prev_pixels[:, i]):
+            continue
+        pix = Pixel( r[i],g[i],b[i])
+        pixel_arr[0][i] = pix
+        pix.print_colors()
+    visualizer.display_visualizer_panel(pixel_arr)
 
 def update():
     """Updates the LED strip values"""
@@ -109,10 +117,7 @@ def update():
     elif config.DEVICE == 'blinkstick':
         _update_blinkstick()
     elif config.DEVICE == 'screen':
-        # _update_blinkstick()
-        print("screen time")
-        visualizer.display_visualizer_panel(pixel_arr)
-        # my_panel.update_panel( pixel_arr );
+        update_screen()
     else:
         raise ValueError('Invalid device selected')
 
@@ -123,7 +128,10 @@ def update():
 if __name__ == '__main__':
     import time
     # Turn all pixels off
-    pixels *= 0
+    if config.DEVICE == 'screen':
+        pixels *= 0
+    else:
+        pixels *= 0
     pixels[0, 0] = 255  # Set 1st pixel red
     pixels[1, 1] = 255  # Set 2nd pixel green
     pixels[2, 2] = 255  # Set 3rd pixel blue
