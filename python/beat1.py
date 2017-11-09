@@ -136,11 +136,11 @@ def visualize_spectrum(y):
         a1 = [temp, 0, 1-temp] 
         a2 = [0, 1-temp, temp]
         
+    amp = 0.5
     
-    
-    r+=a1[0]*0.1; r+=a1[0]*np.max(bassPower/local_N_PIXELS, 0.9)
-    g+=a1[1]*0.1; g+=a1[1]*np.max(bassPower/local_N_PIXELS, 0.9)
-    b+=a1[2]*0.1; b+=a1[2]*np.max(bassPower/local_N_PIXELS, 0.9)
+    r+=a1[0]*(1.0-amp); r+=a1[0]*np.max(bassPower/local_N_PIXELS, amp)
+    g+=a1[1]*(1.0-amp); g+=a1[1]*np.max(bassPower/local_N_PIXELS, amp)
+    b+=a1[2]*(1.0-amp); b+=a1[2]*np.max(bassPower/local_N_PIXELS, amp)
     
     r[0:iMax]+=a2[0]*1.0
     g[0:iMax]+=a2[1]*1.0
