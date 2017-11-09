@@ -111,7 +111,7 @@ def visualize_spectrum(y):
     countEff = count0%nFramesCycle
     if count0%10==0:
         chordObj.printChord()
-'''
+    '''
     if 0.0*nFramesCycle <= countEff <= 0.1*nFramesCycle:
         a1 = [1, 0, 0]
         a2 = [0, 0, 1]
@@ -133,10 +133,7 @@ def visualize_spectrum(y):
         temp = (1/0.2)*(countEff-0.8*nFramesCycle)/nFramesCycle
         a1 = [temp, 0, 1-temp] 
         a2 = [0, 1-temp, temp]
-'''        
-    #r = temp2 * 0.0
-    #g = temp2 * 0.0
-    #b = temp2 * 1.0
+    '''        
     r=a1[0]*temp2
     g=a1[1]*temp2;
     b=a1[2]*temp2;
